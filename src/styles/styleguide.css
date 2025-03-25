@@ -1,0 +1,12 @@
+:root {
+  --gray-300: rgba(210, 217, 225, 1);
+  --gray-900: rgba(22, 29, 39, 1);
+  --main-background: rgba(235, 236, 244, 1);
+  --mainbackgrounddark: rgba(29, 38, 51, 1);
+  --mainlightgray: rgba(244, 244, 249, 1);
+  --mainwhite: rgba(255, 255, 255, 1);
+  --purple-300: rgba(162, 79, 234, 1);
+  --semanticneutral: rgba(92, 103, 115, 1);
+  --shadow-1: 0px 2px 3px 0px rgba(81, 96, 119, 0.2);
+  --textstandart: rgba(33, 33, 33, 1);
+}
