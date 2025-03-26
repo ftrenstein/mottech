@@ -1,21 +1,16 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  ToggleButtonGroup,
-  ToggleButton,
-  List,
-} from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import IconButton from "@mui/material/IconButton";
+
 import ProjectProgressCard from "../components/ProjectProgressCard";
-import { Search } from "@mui/icons-material";
+
 import SearchBar from "../components/SearchBar";
 import DocumentTable from "../components/DocumentTable";
 import ToggleButtons from "../components/ToggleButtons";
+import ParticipantsCard from "../components/ParticipantsCard";
+import DiscussionCard from "../components/DiscussionCard";
+import RightPanel from "../components/RightPanel";
 
 function ProjectOverview() {
   const navigate = useNavigate();
@@ -25,7 +20,8 @@ function ProjectOverview() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: "1280px",
+        // width: "1280px",
+        width: "100%",
         height: "100%",
         gap: 2,
       }}
@@ -62,21 +58,57 @@ function ProjectOverview() {
           Add document
         </Button>
       </Box>
-      <Box sx={{ flexDirection: "column", width: "70%" }}>
-        <ProjectProgressCard />
+      <Box
+        sx={{
+          display: "flex",
+          flex: 1,
+          overflow: "hidden",
+        }}
+      >
         <Box
           sx={{
+            width: "70%",
+            height: "100%",
+            overflowY: "auto",
+            p: 3,
             display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 2,
-            width: "100%",
+            flexDirection: "column",
+            gap: 3,
           }}
         >
-          <ToggleButtons filterOptions={["List", "Tasks", "Reports"]} />
-          <SearchBar />
+          <ProjectProgressCard />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 2,
+              width: "100%",
+            }}
+          >
+            <ToggleButtons filterOptions={["List", "Tasks", "Reports"]} />
+            <SearchBar />
+          </Box>
+          <DocumentTable />
         </Box>
-        <DocumentTable />
+        <Box
+          sx={{
+            width: "30%",
+            height: "100%",
+            gap: 3,
+            p: 3,
+            flexDirection: "column",
+
+            // p: 3,
+            // borderLeft: "1px solid #E8E8E8",
+            // overflowY: "auto",
+            // bgcolor: "white",
+          }}
+        >
+          <RightPanel />
+          {/* <ParticipantsCard /> {/* Add the ParticipantsCard component */}
+          {/* <DiscussionCard /> Add the DiscussionCard component */}
+        </Box>
       </Box>
     </Box>
   );

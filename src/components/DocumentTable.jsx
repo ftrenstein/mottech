@@ -12,7 +12,9 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { documentData } from "../data/documentDataOverview";
 
 const DocumentTable = () => {
-  const [expandedLanguages, setExpandedLanguages] = useState([]);
+  const [expandedLanguages, setExpandedLanguages] = useState(
+    Object.keys(documentData[0].languages)
+  );
 
   const handleLanguageToggle = (language) => {
     setExpandedLanguages((prev) =>

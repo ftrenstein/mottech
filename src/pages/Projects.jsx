@@ -38,8 +38,6 @@ function Projects() {
     navigate("/new-project");
   };
 
-  const typographyStyles = { fontWeight: 600, fontSize: "0.75rem" };
-
   return (
     <Box
       sx={{
@@ -64,7 +62,10 @@ function Projects() {
         </UniversalButton>
       </Box>
       <Card sx={{ p: 5, borderRadius: "5px", border: "1px solid #e8e8e8" }}>
-        <Typography variant="subtitle2" sx={typographyStyles}>
+        <Typography
+          variant="subtitle2"
+          sx={{ fontWeight: 600, fontSize: "0.75rem" }}
+        >
           Projects Overview
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
