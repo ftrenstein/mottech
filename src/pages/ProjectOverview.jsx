@@ -8,8 +8,7 @@ import ProjectProgressCard from "../components/ProjectProgressCard";
 import SearchBar from "../components/SearchBar";
 import DocumentTable from "../components/DocumentTable";
 import ToggleButtons from "../components/ToggleButtons";
-import ParticipantsCard from "../components/ParticipantsCard";
-import DiscussionCard from "../components/DiscussionCard";
+
 import RightPanel from "../components/RightPanel";
 
 function ProjectOverview() {

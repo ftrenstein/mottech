@@ -5,6 +5,7 @@ import { documentData, categoryOptions } from "../data/documentData";
 import ListDoc from "../components/List";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
+import { List, ListItem, ListItemText } from "@mui/material";
 
 const Documents = () => {
   const theme = useTheme();
@@ -15,14 +16,14 @@ const Documents = () => {
     setSelectedCategory(category);
   };
 
-  // const [documentData, setDocumentData] = useState([]);
+  const [documentData, setDocumentData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/documents/")
-  //     .then((response) => response.json())
-  //     .then((data) => setDocumentData(data))
-  //     .catch((error) => console.error("Ошибка загрузки документов:", error));
-  // }, []);
+  useEffect(() => {
+    fetch("https://mot.tech/demo/data/tenants")
+      .then((response) => response.json())
+      .then((data) => setDocumentData(data))
+      .catch((error) => console.error("Ошибка загрузки документов:", error));
+  }, []);
 
   return (
     <Box
@@ -86,10 +87,21 @@ const Documents = () => {
       </Box>
 
       {/* Documents Table */}
-      <ListDoc
+      <List>
+        {documentData.map((document, index) => (
+          <ListItem key={index}>
+            <ListItemText
+              primary={document.tenantName}
+              secondary={document.id}
+            />
+          </ListItem>
+        ))}
+      </List>
+
+      {/* <ListDoc
         titles={["Documents", "Category", "Due date", "Project"]}
         rows={documentData}
-      />
+      /> */}
     </Box>
   );
 };
