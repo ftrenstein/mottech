@@ -38,7 +38,7 @@ const ProtectedRoutes = () => (
       <Route path="/" element={<Dashboard />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/new-project" element={<NewProject />} />
-      <Route path="/project-overview" element={<ProjectOverview />} />
+      <Route path="/projectOverview/:id" element={<ProjectOverview />} />
       <Route path="/documents" element={<Documents />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/access-rights" element={<AccessRights />} />

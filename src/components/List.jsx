@@ -13,6 +13,34 @@ import {
 } from "@mui/material";
 import Alarm from "@mui/icons-material/Alarm";
 import Error from "@mui/icons-material/Error";
+import LinearProgress from "@mui/material/LinearProgress";
+
+const ProgressBar = ({ value }) => {
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        borderRadius: 2,
+        overflow: "hidden",
+        backgroundColor: "#E3E6EB",
+      }}
+    >
+      <LinearProgress
+        variant="determinate"
+        value={value}
+        sx={{
+          height: 12,
+          borderRadius: 2,
+          backgroundColor: "transparent",
+          "& .MuiLinearProgress-bar": {
+            backgroundColor: "#3778a6", // Синий цвет заполнения
+            borderRadius: 2,
+          },
+        }}
+      />
+    </Box>
+  );
+};
 
 const columnConfig = {
   status: {
@@ -31,15 +59,13 @@ const columnConfig = {
   },
 };
 
-const ListDoc = ({ titles = [], rows = [] }) => {
+const ListDoc = ({ titles = [], rows = [], onRowClick }) => {
   const theme = useTheme();
   console.log("rows", rows);
   if (!rows || rows.length === 0) return <Typography>Нет данных</Typography>;
 
   return (
     <TableContainer
-      component={Paper}
-      elevation={0}
       sx={{
         border: "none",
       }}
@@ -52,9 +78,7 @@ const ListDoc = ({ titles = [], rows = [] }) => {
                 key={header}
                 sx={{
                   fontSize: theme.typography.body2.fontSize,
-                  color: theme.palette.text.secondary,
-                  // pl: header === "Documents" ? 4 : 0,
-                  pl: 4,
+                  padding: "16px",
                 }}
               >
                 {header}
@@ -62,12 +86,12 @@ const ListDoc = ({ titles = [], rows = [] }) => {
             ))}
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ border: "none", bgcolor: "white" }}>
           {rows.map((row) => (
             <TableRow
               key={row.id}
               hover
-              onClick={() => console.log(`Clicked on row ${row.id}`)}
+              onClick={() => onRowClick && onRowClick(row)}
               sx={{
                 bgcolor: row.status === "overdue" ? "#fff6f5" : "inherit",
                 "&:hover": { cursor: "pointer" },
@@ -76,64 +100,27 @@ const ListDoc = ({ titles = [], rows = [] }) => {
               {Object.keys(row)
                 .slice(1)
                 .map((key) => (
-                  <TableCell key={key} sx={{ ...columnConfig[key]?.sx }}>
-                    {columnConfig[key]?.render
-                      ? columnConfig[key].render(row[key])
-                      : row[key]}
+                  <TableCell
+                    key={key}
+                    sx={{ ...columnConfig[key]?.sx, padding: "16px" }}
+                  >
+                    {key === "completed" ? (
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", gap: 3 }}
+                      >
+                        <ProgressBar value={row[key]} />
+                        <Typography>{`${row[key]}%`}</Typography>
+                      </Box>
+                    ) : columnConfig[key]?.render ? (
+                      columnConfig[key].render(row[key])
+                    ) : (
+                      row[key]
+                    )}
                   </TableCell>
                 ))}
             </TableRow>
           ))}
         </TableBody>
-        {/* <TableBody>
-          {data.map((row) => (
-            <TableRow
-              key={row.id}
-              hover
-              onClick={() => console.log(`Clicked on row ${row.id}`)}
-              sx={{
-                bgcolor:
-                  row.status === "overdue"
-                    ? "#fff6f5"
-                    : theme.palette.background.paper,
-                "&:hover": { cursor: "pointer" },
-              }}
-            >
-              <TableCell
-                sx={{ fontSize: theme.typography.body2.fontSize, pl: 4 }}
-              >
-                {row.name}
-              </TableCell>
-              <TableCell sx={{ fontSize: theme.typography.body2.fontSize }}>
-                {row.category}
-              </TableCell>
-              <TableCell>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  {row.status === "overdue" && (
-                    <Alarm sx={{ color: theme.palette.error.main }} />
-                  )}
-                  {row.status === "warning" && (
-                    <Error sx={{ color: "orange" }} />
-                  )}
-                  <Typography
-                    sx={{
-                      fontSize: theme.typography.body2.fontSize,
-                      color:
-                        row.status === "overdue"
-                          ? theme.palette.error.main
-                          : "inherit",
-                    }}
-                  >
-                    {row.dueDate}
-                  </Typography>
-                </Box>
-              </TableCell>
-              <TableCell sx={{ fontSize: theme.typography.body2.fontSize }}>
-                {row.project}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody> */}
       </Table>
     </TableContainer>
   );

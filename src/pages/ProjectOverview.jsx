@@ -1,25 +1,37 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
 import ProjectProgressCard from "../components/ProjectProgressCard";
-
 import SearchBar from "../components/SearchBar";
 import DocumentTable from "../components/DocumentTable";
 import ToggleButtons from "../components/ToggleButtons";
-
 import RightPanel from "../components/RightPanel";
+import ongoingData from "../data/Ongoindata";
 
 function ProjectOverview() {
-  const navigate = useNavigate();
+  const { id } = useParams(); // Получаем ID проекта из URL
+
+  // Преобразуем id из строки в число, чтобы корректно искать в массиве
+  const projectId = parseInt(id, 10);
+
+  // Ищем проект по ID в массиве projects
+  const project = ongoingData.projects.find((proj) => proj.id === projectId);
+
+  if (!project) {
+    return (
+      <Typography variant="h4" sx={{ textAlign: "center", mt: 5 }}>
+        Project not found
+      </Typography>
+    );
+  }
 
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        // width: "1280px",
         width: "100%",
         height: "100%",
         gap: 2,
@@ -36,7 +48,7 @@ function ProjectOverview() {
         <Typography
           sx={{ flex: 1, fontSize: 30, fontWeight: 400, fontFamily: "Inter" }}
         >
-          {"->Project Name"}
+          {`Project: ${project.name}`} {/* Отображаем имя проекта */}
         </Typography>
         <Button
           startIcon={<AddIcon sx={{ fontSize: 20 }} />}
@@ -97,16 +109,9 @@ function ProjectOverview() {
             gap: 3,
             p: 3,
             flexDirection: "column",
-
-            // p: 3,
-            // borderLeft: "1px solid #E8E8E8",
-            // overflowY: "auto",
-            // bgcolor: "white",
           }}
         >
           <RightPanel />
-          {/* <ParticipantsCard /> {/* Add the ParticipantsCard component */}
-          {/* <DiscussionCard /> Add the DiscussionCard component */}
         </Box>
       </Box>
     </Box>

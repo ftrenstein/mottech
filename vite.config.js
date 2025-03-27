@@ -5,4 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "https://mot.tech/demo/",
+  server: {
+    historyApiFallback: true,
+  },
 });

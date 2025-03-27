@@ -45,6 +45,7 @@ function Projects() {
         flexDirection: "column",
         width: "1280px",
         height: "100%",
+
         gap: 2,
       }}
     >
@@ -53,6 +54,7 @@ function Projects() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+
           mb: 2,
         }}
       >
@@ -98,61 +100,68 @@ function Projects() {
             />
           ))}
         </Box>
-        <Box
+      </Card>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 2,
+          width: "100%",
+        }}
+      >
+        <ToggleButtonGroup
+          value={filter}
+          exclusive
+          onChange={handleFilterChange}
+          aria-label="filter options"
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 2,
-            width: "100%",
+            height: 40,
+            width: "auto",
+            "& .MuiToggleButtonGroup-grouped": {
+              border: "1px solid #e8e8e8",
+              borderRadius: "0px 5px 5px 0px",
+              borderLeft: 0,
+              padding: "10px",
+              fontSize: "14px",
+              textTransform: "none",
+              "&:not(:first-of-type)": { borderLeft: 0 },
+            },
           }}
         >
-          <ToggleButtonGroup
-            value={filter}
-            exclusive
-            onChange={handleFilterChange}
-            aria-label="filter options"
-            sx={{
-              height: 40,
-              width: "auto",
-              "& .MuiToggleButtonGroup-grouped": {
-                border: "1px solid #e8e8e8",
-                borderRadius: "0px 5px 5px 0px",
-                borderLeft: 0,
-                padding: "10px",
-                fontSize: "14px",
-                textTransform: "none",
-                "&:not(:first-of-type)": { borderLeft: 0 },
-              },
-            }}
-          >
-            {filterOptions.map((value) => (
-              <ToggleButton
-                key={value}
-                value={value}
-                sx={{
-                  bgcolor: filter === value ? "white" : "#f5f5f5",
-                  color: "black",
-                  "&.Mui-selected": { bgcolor: "white" },
-                }}
-              >
-                {value.charAt(0).toUpperCase() + value.slice(1)}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-          <SearchBar
-            placeholder="Search projects"
-            onSearch={(value) => console.log(value)}
-            sx={{ flexGrow: 1 }}
-          />
-        </Box>
-        <Box>
-          <ListDoc
-            titles={["Project", "Starting date", "Languages", "Completed"]}
-            rows={projectDatas}
-          />
-        </Box>
-      </Card>
+          {filterOptions.map((value) => (
+            <ToggleButton
+              key={value}
+              value={value}
+              sx={{
+                bgcolor: filter === value ? "white" : "#f5f5f5",
+                color: "black",
+                "&.Mui-selected": { bgcolor: "white" },
+              }}
+            >
+              {value.charAt(0).toUpperCase() + value.slice(1)}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+        <SearchBar
+          placeholder="Search projects"
+          onSearch={(value) => console.log(value)}
+          sx={{ flexGrow: 1 }}
+        />
+      </Box>
+      <Box>
+        <ListDoc
+          titles={[
+            "Project",
+            "Starting date",
+            "Languages",
+            "Completed",
+            "Total docs",
+          ]}
+          rows={projectDatas}
+          onRowClick={(row) => navigate(`/projectOverview/${row.id}`)}
+        />
+      </Box>
     </Box>
   );
 }
