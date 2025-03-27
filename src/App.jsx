@@ -12,6 +12,7 @@ import ProjectOverview from "./pages/ProjectOverview";
 import Documents from "./pages/Documents";
 import Reports from "./pages/Reports";
 import AccessRights from "./pages/AccessRights";
+import DocumentOverview from "./pages/DocumentOverview";
 
 // Компоненты
 import Sidebar from "./components/Sidebar";
@@ -40,6 +41,7 @@ const ProtectedRoutes = () => (
       <Route path="/new-project" element={<NewProject />} />
       <Route path="/projectOverview/:id" element={<ProjectOverview />} />
       <Route path="/documents" element={<Documents />} />
+      <Route path="/documentsOverview/:id" element={<DocumentOverview />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/access-rights" element={<AccessRights />} />
     </Routes>

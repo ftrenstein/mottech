@@ -12,12 +12,8 @@ import ongoingData from "../data/Ongoindata";
 
 function ProjectOverview() {
   const { id } = useParams(); // Получаем ID проекта из URL
-
-  // Преобразуем id из строки в число, чтобы корректно искать в массиве
   const projectId = parseInt(id, 10);
-
-  // Ищем проект по ID в массиве projects
-  const project = ongoingData.projects.find((proj) => proj.id === projectId);
+  const project = ongoingData.projects?.find((proj) => proj.id === projectId);
 
   if (!project) {
     return (
@@ -26,7 +22,6 @@ function ProjectOverview() {
       </Typography>
     );
   }
-
   return (
     <Box
       sx={{
@@ -48,7 +43,7 @@ function ProjectOverview() {
         <Typography
           sx={{ flex: 1, fontSize: 30, fontWeight: 400, fontFamily: "Inter" }}
         >
-          {`Project: ${project.name}`} {/* Отображаем имя проекта */}
+          {`Project: ${project.name}`} {/* Отображаем ID проекта */}
         </Typography>
         <Button
           startIcon={<AddIcon sx={{ fontSize: 20 }} />}

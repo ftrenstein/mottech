@@ -25,3 +25,36 @@ export const documentData = [
   },
   // Add more documents here
 ];
+
+export const translations = [
+  {
+    id: 1,
+    source: "IMPORTANT INFORMATION",
+    french: "INFORMATIONS IMPORTANTES",
+  },
+  {
+    id: 2,
+    source:
+      "It is recommended that advice from a veterinarian be sought before use and before extending the period of use.",
+    french:
+      "Il est recommandé de consulter un vétérinaire avant utilisation ou prolongation de la période d’utilisation",
+  },
+  {
+    id: 3,
+    source: "DIGESTIVE SUPPORT",
+    french: "SOUTIEN DIGESTIF",
+  },
+  {
+    id: 4,
+    source:
+      "A SCIENCE-BASED FORMULA FOR YOUR CAT WITH GASTROINTESTINAL PROBLEMS",
+    french:
+      "UNE FORMULE DÉVELOPPÉE SCIENTIFIQUEMENT POUR VOTRE CHAT AYANT DES PROBLÈMES GASTRO-INTESTINAUX",
+  },
+  {
+    id: 5,
+    source: "High palatability to satisfy decreased appetites.",
+    french:
+      "Haute appétence pour satisfaire les animaux présentant une perte d’appétit.",
+  },
+];

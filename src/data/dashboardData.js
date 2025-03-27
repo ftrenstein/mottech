@@ -57,7 +57,6 @@ export const projectDatas = [
     languages: 1,
     completed: 80,
     hasAlert: true,
-    total_docs: 12,
   },
   {
     id: 2,

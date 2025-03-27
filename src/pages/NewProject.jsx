@@ -4,14 +4,33 @@ import WorkflowBlock from "../components/WorkflowBlock";
 import UniversalButton from "../components/UniversalButton";
 import FileUploadBlock from "../components/FileUploadBlock";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function NewProject() {
   const navigate = useNavigate();
+  const [projectName, setProjectName] = useState("New project");
+  const [projects, setProjects] = useState([]);
+
   const handleCancelProjectClick = () => {
     navigate("/projects");
   };
   const handleCreateProjectClick = () => {
-    navigate("/project-overview");
+    // Simulate creating a new project
+    const newProject = {
+      id: Date.now(), // Unique ID for the project
+      name: projectName,
+      starting_date: new Date().toISOString().split("T")[0],
+      total_languages: 1,
+      completed: "0%",
+      total_documents: 0,
+    };
+    setProjects([...projects, newProject]);
+
+    // Save the project (e.g., update state or send to backend)
+    console.log("New Project Created:", newProject);
+
+    // Redirect to the new project's overview page
+    navigate(`/projectOverview/${newProject.id}`);
   };
 
   return (

@@ -8,12 +8,14 @@ import {
 } from "@mui/material";
 import SearchBar from "../components/SearchBar";
 import ListDoc from "../components/List";
-import { projectDatas } from "../data/dashboardData";
+
+import ongoingData from "../data/Ongoindata";
 import UniversalButton from "../components/UniversalButton";
 import { useNavigate } from "react-router-dom";
 
 function Projects() {
   const navigate = useNavigate();
+  // const [projects, setProjects] = React.useState(ongoingData.projects);
   const barData = React.useMemo(
     () => [
       { width: 53, height: 3, top: 56, left: 0, opacity: 0.5 },
@@ -25,7 +27,7 @@ function Projects() {
     []
   );
   const [filter, setFilter] = React.useState("ongoing");
-
+  console.log("Ongoing Data Projects:", ongoingData.projects);
   const handleFilterChange = (event, newFilter) => {
     if (newFilter !== null) {
       setFilter(newFilter);
@@ -35,7 +37,7 @@ function Projects() {
   const filterOptions = ["ongoing", "previous"];
 
   const handleNewProjectClick = () => {
-    navigate("/new-project");
+    navigate(`/new-project`);
   };
 
   return (
@@ -158,7 +160,21 @@ function Projects() {
             "Completed",
             "Total docs",
           ]}
-          rows={projectDatas}
+          rows={ongoingData.projects.map((project) => ({
+            id: project.id,
+            name: project.name,
+            starting_date: project.starting_date,
+            total_languages: project.total_languages,
+            completed: project.completed,
+            total_documents: project.total_documents,
+          }))}
+          columns={[
+            "name",
+            "starting_date",
+            "total_languages",
+            "completed",
+            "total_documents",
+          ]}
           onRowClick={(row) => navigate(`/projectOverview/${row.id}`)}
         />
       </Box>

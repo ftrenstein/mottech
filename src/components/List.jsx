@@ -59,7 +59,7 @@ const columnConfig = {
   },
 };
 
-const ListDoc = ({ titles = [], rows = [], onRowClick }) => {
+const ListDoc = ({ titles = [], rows = [], columns = [], onRowClick }) => {
   const theme = useTheme();
   console.log("rows", rows);
   if (!rows || rows.length === 0) return <Typography>Нет данных</Typography>;
@@ -97,27 +97,25 @@ const ListDoc = ({ titles = [], rows = [], onRowClick }) => {
                 "&:hover": { cursor: "pointer" },
               }}
             >
-              {Object.keys(row)
-                .slice(1)
-                .map((key) => (
-                  <TableCell
-                    key={key}
-                    sx={{ ...columnConfig[key]?.sx, padding: "16px" }}
-                  >
-                    {key === "completed" ? (
-                      <Box
-                        sx={{ display: "flex", alignItems: "center", gap: 3 }}
-                      >
-                        <ProgressBar value={row[key]} />
-                        <Typography>{`${row[key]}%`}</Typography>
-                      </Box>
-                    ) : columnConfig[key]?.render ? (
-                      columnConfig[key].render(row[key])
-                    ) : (
-                      row[key]
-                    )}
-                  </TableCell>
-                ))}
+              {columns.map((key) => (
+                <TableCell
+                  key={key}
+                  sx={{ ...columnConfig[key]?.sx, padding: "16px" }}
+                >
+                  {key === "completed" ? (
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                      <ProgressBar value={row[key]} />
+                      <Typography>{`${row[key]}%`}</Typography>
+                    </Box>
+                  ) : Array.isArray(row[key]) ? (
+                    row[key].join(", ")
+                  ) : typeof row[key] === "object" && row[key] !== null ? (
+                    JSON.stringify(row[key])
+                  ) : (
+                    row[key]
+                  )}
+                </TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>
