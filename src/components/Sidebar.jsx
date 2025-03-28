@@ -8,6 +8,7 @@ import {
   BarChart,
   Group,
 } from "@mui/icons-material";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import { useTheme } from "@mui/material/styles";
 import logo from "../assets/logo.svg";
 
@@ -33,7 +34,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const links = [
     { to: "/", icon: Dashboard },
-    { to: "/projects", icon: Description },
+    { to: "/projects", icon: FormatListBulletedIcon },
     { to: "/documents", icon: Assignment },
     { to: "/reports", icon: BarChart },
     { to: "/access-rights", icon: Group },
@@ -78,7 +79,7 @@ const Sidebar = () => {
             key={index}
             to={link.to}
             icon={link.icon}
-            isActive={location.pathname === link.to} // Проверяем, активен ли маршрут
+            isActive={location.pathname === link.to}
           />
         ))}
       </Stack>

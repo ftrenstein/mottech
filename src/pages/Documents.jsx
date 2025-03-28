@@ -14,14 +14,14 @@ const Documents = () => {
     setSelectedCategory(category);
   };
 
-  const [documentData, setDocumentData] = useState([]);
+  // const [documentData, setDocumentData] = useState([]);
 
-  useEffect(() => {
-    fetch("https://mot.tech/demo/data/tenants")
-      .then((response) => response.json())
-      .then((data) => setDocumentData(data))
-      .catch((error) => console.error("Ошибка загрузки документов:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://mot.tech/demo/data/tenants")
+  //     .then((response) => response.json())
+  //     .then((data) => setDocumentData(data))
+  //     .catch((error) => console.error("Ошибка загрузки документов:", error));
+  // }, []);
 
   return (
     <Box
@@ -83,8 +83,8 @@ const Documents = () => {
           ))}
         </Box>
       </Box>
-
-      {/* Documents Table */}
+      {/* 
+      Documents Table
       <List>
         {documentData.map((document, index) => (
           <ListItem key={index}>
@@ -94,12 +94,14 @@ const Documents = () => {
             />
           </ListItem>
         ))}
-      </List>
+      </List> */}
 
-      {/* <ListDoc
+      <ListDoc
         titles={["Documents", "Category", "Due date", "Project"]}
         rows={documentData}
-      /> */}
+        onRowClick={(row) => console.log("Row clicked:", row)} // Example callback
+        loading={false} // Example loading state
+      />
     </Box>
   );
 };
