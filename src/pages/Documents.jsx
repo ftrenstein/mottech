@@ -6,9 +6,12 @@ import ListDoc from "../components/List";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { List, ListItem, ListItemText } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ongoingData from "../data/Ongoindata";
 
 const Documents = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = React.useState("All");
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -83,24 +86,18 @@ const Documents = () => {
           ))}
         </Box>
       </Box>
-      {/* 
-      Documents Table
-      <List>
-        {documentData.map((document, index) => (
-          <ListItem key={index}>
-            <ListItemText
-              primary={document.tenantName}
-              secondary={document.id}
-            />
-          </ListItem>
-        ))}
-      </List> */}
 
       <ListDoc
         titles={["Documents", "Category", "Due date", "Project"]}
-        rows={documentData}
-        onRowClick={(row) => console.log("Row clicked:", row)} // Example callback
-        loading={false} // Example loading state
+        rows={ongoingData.projects[0].documents.map((document) => ({
+          id: document.id,
+          name: document.name,
+          category: document.category,
+          due_date: document.due_date,
+          project: ongoingData.projects[0].name,
+        }))}
+        columns={["name", "category", "due_date", "project"]}
+        onRowClick={() => navigate(`/documentOverview`)}
       />
     </Box>
   );
