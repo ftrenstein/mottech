@@ -14,14 +14,23 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import theme from "../theme/theme";
 
 const IconWithMenu = ({ icon: Icon, menuItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate(); // Add navigation hook
 
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
+
+  const handleMenuItemClick = (item) => {
+    if (item === "Exit") {
+      navigate("/login"); // Navigate to login page
+    }
+    handleMenuClose();
+  };
 
   return (
     <>
@@ -30,7 +39,7 @@ const IconWithMenu = ({ icon: Icon, menuItems }) => {
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
         {menuItems.map((item, index) => (
-          <MenuItem key={index} onClick={handleMenuClose}>
+          <MenuItem key={index} onClick={() => handleMenuItemClick(item)}>
             {item}
           </MenuItem>
         ))}
@@ -76,7 +85,7 @@ const Navbar = () => {
           </IconButton>
 
           <Stack direction="row" alignItems="center" spacing={1}>
-            <Avatar>
+            <Avatar src="https://i.pravatar.cc/150?img=3" alt="Random Avatar">
               <Typography
                 variant="body1"
                 color="text.primary"
