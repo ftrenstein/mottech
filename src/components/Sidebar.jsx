@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Stack, IconButton, Paper } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Dashboard,
   Description,
@@ -11,15 +11,15 @@ import {
 import { useTheme } from "@mui/material/styles";
 import logo from "../assets/logo.svg";
 
-const IconLink = ({ to, icon: Icon, isActive, onClick }) => {
+const IconLink = ({ to, icon: Icon, isActive }) => {
   const theme = useTheme();
   return (
-    <IconButton component={Link} to={to} onClick={onClick}>
+    <IconButton component={Link} to={to}>
       <Paper
         elevation={0}
         sx={{
           ...theme.components.IconLink,
-          color: isActive ? "#3778a6" : "black",
+          color: isActive ? "#3778a6" : "black", // Подсветка активного значка
         }}
       >
         <Icon fontSize="small" />
@@ -29,7 +29,7 @@ const IconLink = ({ to, icon: Icon, isActive, onClick }) => {
 };
 
 const Sidebar = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation(); // Получаем текущий маршрут
   const theme = useTheme();
   const links = [
     { to: "/", icon: Dashboard },
@@ -38,10 +38,6 @@ const Sidebar = () => {
     { to: "/reports", icon: BarChart },
     { to: "/access-rights", icon: Person },
   ];
-
-  const handleIconClick = (index) => {
-    setActiveIndex(index);
-  };
 
   return (
     <Box
@@ -82,8 +78,7 @@ const Sidebar = () => {
             key={index}
             to={link.to}
             icon={link.icon}
-            isActive={activeIndex === index}
-            onClick={() => handleIconClick(index)}
+            isActive={location.pathname === link.to} // Проверяем, активен ли маршрут
           />
         ))}
       </Stack>

@@ -13,7 +13,6 @@ const ProjectsOverviewCard = ({ data }) => {
     { width: 53, height: 8, top: 51, left: 257, opacity: 1 },
   ];
   const handleNewProjectClick = () => {
-    console.log("Button clicked");
     navigate("/new-project");
   };
 
@@ -87,6 +86,7 @@ const ProjectsOverviewCard = ({ data }) => {
                 fontFamily: "'Inter-Regular', Helvetica",
                 fontWeight: "normal",
               }}
+              onClick={() => navigate("/projects")}
             >
               See all projects
             </Button>

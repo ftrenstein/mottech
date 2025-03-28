@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Card, Stack, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const DocumentsCard = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <Card sx={{ p: 2.5, height: "auto", borderRadius: "5px", width: "333px" }}>
       <Stack spacing={2.5}>
@@ -26,6 +28,7 @@ const DocumentsCard = ({ data }) => {
                 fontFamily: "'Inter-Regular', Helvetica",
                 fontWeight: "normal",
               }}
+              onClick={() => navigate("/documents")}
             >
               See all documents
             </Button>
