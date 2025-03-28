@@ -107,6 +107,14 @@ const ListDoc = ({ titles = [], rows = [], columns = [], onRowClick }) => {
                       <ProgressBar value={row[key]} />
                       <Typography>{`${row[key]}%`}</Typography>
                     </Box>
+                  ) : key === "starting_date" ? (
+                    new Date(row[key]).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
                   ) : Array.isArray(row[key]) ? (
                     row[key].join(", ")
                   ) : typeof row[key] === "object" && row[key] !== null ? (

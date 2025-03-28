@@ -9,9 +9,7 @@ import { List, ListItem, ListItemText } from "@mui/material";
 
 const Documents = () => {
   const theme = useTheme();
-  const [selectedCategory, setSelectedCategory] = React.useState(
-    "PRODUCT DESCRIPTION"
-  );
+  const [selectedCategory, setSelectedCategory] = React.useState("All");
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };

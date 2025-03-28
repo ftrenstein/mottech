@@ -6,13 +6,15 @@ const UniversalButton = ({
   variant = "contained",
   startIcon = <Add />,
   children,
+  type = "button",
   sx,
   onClick,
 }) => {
   return (
     <Button
       variant={variant}
-      startIcon={startIcon}
+      type={type}
+      startIcon={startIcon ? startIcon : null}
       sx={(theme) => ({
         bgcolor: theme.palette.mainblue, // Assuming primary.main is the intended color
         textTransform: "none",

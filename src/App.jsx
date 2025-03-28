@@ -53,7 +53,7 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/demo/">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
