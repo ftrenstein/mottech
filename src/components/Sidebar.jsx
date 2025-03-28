@@ -6,7 +6,7 @@ import {
   Description,
   Assignment,
   BarChart,
-  Person,
+  Group,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import logo from "../assets/logo.svg";
@@ -19,7 +19,7 @@ const IconLink = ({ to, icon: Icon, isActive }) => {
         elevation={0}
         sx={{
           ...theme.components.IconLink,
-          color: isActive ? "#3778a6" : "black", // Подсветка активного значка
+          color: isActive ? "#3778a6" : "#777777", // Change default color to gray
         }}
       >
         <Icon fontSize="small" />
@@ -36,7 +36,7 @@ const Sidebar = () => {
     { to: "/projects", icon: Description },
     { to: "/documents", icon: Assignment },
     { to: "/reports", icon: BarChart },
-    { to: "/access-rights", icon: Person },
+    { to: "/access-rights", icon: Group },
   ];
 
   return (
