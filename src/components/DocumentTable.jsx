@@ -26,51 +26,29 @@ const DocumentTable = () => {
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-      }}
+      display="flex"
+      flexDirection="column"
+      width="100%"
+      height="100%"
+      gap={2}
     >
-      {/* Header Spacer */}
-      <Box sx={{ width: 816, height: "auto", mt: 5 }} />
-      {/* Header */}
-      <Box sx={{ display: "flex", width: "100%", gap: 4, mb: 5 }}>
-        <Box sx={{ width: 50, justifyContent: "space-between" }} />
-        <Typography
-          variant="caption"
-          sx={{ color: "text.secondary", width: 192 }}
-        >
-          Document
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: "text.secondary", width: 82 }}
-        >
-          Current status
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: "text.secondary", width: 82 }}
-        >
-          Statuses overview
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: "text.secondary", width: 82 }}
-        >
-          Due date
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: "text.secondary", width: 108 }}
-        >
-          Executors
-        </Typography>
+      <Box
+        display="grid"
+        gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr" // Автоматическое распределение
+        width="100%"
+        gap={2}
+        mb={3}
+        px={3}
+      >
+        <Box width={40} /> {/* Placeholder для чекбокса */}
+        <HeaderCell>Document</HeaderCell>
+        <HeaderCell>Current status</HeaderCell>
+        <HeaderCell>Statuses overview</HeaderCell>
+        <HeaderCell>Due date</HeaderCell>
+        <HeaderCell>Executors</HeaderCell>
       </Box>
-      {/* Language Selectors */}
+
+      {/* Language Sections */}
       {Object.keys(documentData[0].languages).map((language) => (
         <React.Fragment key={language}>
           <LanguageSelector
@@ -78,56 +56,59 @@ const DocumentTable = () => {
             expanded={expandedLanguages.includes(language)}
             onToggle={() => handleLanguageToggle(language)}
           />
-          {expandedLanguages.includes(language) &&
-            documentData.map((doc, index) => (
-              <DocumentRow
-                key={index}
-                document={doc.document}
-                {...doc.languages[language]}
-              />
-            ))}
+          {expandedLanguages.includes(language) && (
+            <Box border={1} borderColor="divider" borderRadius={1} mb={2}>
+              {documentData.map((doc, index) => (
+                <DocumentRow
+                  key={`${language}-${index}`}
+                  document={doc.document}
+                  {...doc.languages[language]}
+                  last={index === documentData.length - 1}
+                />
+              ))}
+            </Box>
+          )}
         </React.Fragment>
       ))}
     </Box>
   );
 };
 
-// Reusable Components
+// Subcomponents
+const HeaderCell = ({ width, children }) => (
+  <Typography variant="caption" color="text.secondary" width={width}>
+    {children}
+  </Typography>
+);
+
 const LanguageSelector = ({ language, expanded, onToggle }) => (
   <Box
-    sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      gap: 2,
-      width: "20%",
-      "&:hover": {
-        backgroundColor: "rgba(0, 0, 0, 0.04)",
-      },
-    }}
+    display="flex"
+    alignItems="center"
+    gap={2}
+    width="20%"
     onClick={onToggle}
+    mb={1}
+    sx={{
+      "&:hover": { backgroundColor: "action.hover" },
+      cursor: "pointer",
+    }}
   >
     <Chip
       label={language}
       sx={{
-        flex: 1,
         border: "1px solid",
-        bgcolor: "white",
         borderColor: "divider",
+        bgcolor: "background.paper",
         borderRadius: 1,
-
-        height: 23,
+        height: 24,
         "& .MuiChip-label": {
           fontSize: 12,
           fontWeight: 400,
-          color: "black",
         },
       }}
     />
-    <IconButton
-      size="small"
-      sx={{ transform: expanded ? "rotate(180deg)" : "none" }}
-    >
+    <IconButton size="small">
       {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
     </IconButton>
   </Box>
@@ -139,74 +120,43 @@ const DocumentRow = ({
   date,
   executors,
   progress = [],
-  variant = "default",
+  last,
 }) => {
-  const borderStyles = {
-    top: {
-      borderTopLeftRadius: 4,
-      borderTopRightRadius: 4,
-      borderTop: 1,
-      borderLeft: 1,
-      borderRight: 1,
-      borderBottom: 0,
-    },
-    bottom: {
-      borderBottomLeftRadius: 4,
-      borderBottomRightRadius: 4,
-      borderBottom: 1,
-      borderLeft: 1,
-      borderRight: 1,
-      borderTop: 0,
-    },
-    default: { borderRadius: 1, border: 1 },
-  };
-
   return (
     <Box
+      display="grid"
+      gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr" // Такие же пропорции как в заголовке
+      alignItems="center"
+      width="100%"
+      height={56}
+      px={3}
+      borderRadius={3}
       sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 4,
-        width: "100%",
-        height: 72,
         backgroundColor: "background.paper",
-        borderColor: "divider",
-        ...borderStyles[variant],
-        boxShadow: 1,
         "&:hover": {
-          boxShadow: 3,
+          backgroundColor: "action.hover",
+          cursor: "pointer",
         },
       }}
     >
-      <Checkbox
-        sx={{ color: "#3778A6", "&.Mui-checked": { color: "#3778A6" } }}
-      />
-      {/* Document Name */}
-      <Typography variant="body2" sx={{ width: 192, px: 2 }}>
+      <Checkbox color="#3778A6" size="small" sx={{ mr: 2, color: "#3778A6" }} />
+
+      <Typography variant="body2" width={192} noWrap>
         {document}
       </Typography>
 
-      {/* Status */}
-      <Typography variant="body2" sx={{ width: 82 }}>
+      <Typography variant="body2" width={82}>
         {status}
       </Typography>
 
-      {/* Progress Indicators */}
-      <Box
-        sx={{
-          width: 82,
-          display: "flex",
-          alignItems: "center",
-          gap: 0.5,
-        }}
-      >
+      <Box width={82} display="flex" gap={1}>
         {progress.map((state, index) => (
           <Box
             key={index}
+            width={12}
+            height={12}
+            borderRadius="50%"
             sx={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
               backgroundColor:
                 state === true
                   ? "#3778A6"
@@ -221,37 +171,26 @@ const DocumentRow = ({
         ))}
       </Box>
 
-      {/* Date */}
       <Typography
         variant="body2"
-        sx={{
-          width: 82,
-          color:
-            date === "As soon as possible" ? "text.secondary" : "text.primary",
-        }}
+        width={82}
+        color={
+          date === "As soon as possible" ? "text.secondary" : "text.primary"
+        }
       >
         {date}
       </Typography>
 
-      {/* Executors */}
-      <Box
-        sx={{
-          width: 108,
-          display: "flex",
-          gap: 1,
-        }}
-      >
+      <Box width={108} display="flex" gap={1}>
         {executors.map((initial, index) => (
           <Avatar
             key={index}
             sx={{
               width: 24,
               height: 24,
-              bgcolor: "background.paper",
-              border: "1px solid",
-              borderColor: "divider",
-              color: "text.secondary",
+              bgcolor: "grey.100",
               fontSize: 12,
+              color: "text.secondary",
             }}
           >
             {initial}

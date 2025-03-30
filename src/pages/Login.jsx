@@ -108,7 +108,7 @@ const Login = () => {
               type="submit"
               variant="contained"
               color="primary"
-              maxWidthwidth="100%"
+              maxwidth="100%"
               sx={{
                 border: "0.5px solid white", // Добавляем тонкую белую обводку
                 "&:hover": {

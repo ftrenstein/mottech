@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
 import ProjectProgressCard from "../components/ProjectProgressCard";
@@ -11,52 +11,44 @@ import RightPanel from "../components/RightPanel";
 import ongoingData from "../data/Ongoindata";
 
 function ProjectOverview() {
-  const { id } = useParams(); // Получаем ID проекта из URL
+  const { id } = useParams();
   const projectId = parseInt(id, 10);
   const project = ongoingData.projects?.find((proj) => proj.id === projectId);
 
   if (!project) {
     return (
-      <Typography variant="h4" sx={{ textAlign: "center", mt: 5 }}>
+      <Typography variant="h4" textAlign="center" mt={5}>
         Project not found
       </Typography>
     );
   }
+
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100%",
-        gap: 2,
-      }}
+      display="flex"
+      flexDirection="column"
+      width="100%"
+      height="100%"
+      overflow="hidden"
     >
+      {/* Header Section - добавлен box-sizing */}
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 2,
-        }}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+        px={3} // Добавляем горизонтальный padding такой же как у контента
+        boxSizing="border-box" // Важно!
       >
-        <Typography
-          sx={{ flex: 1, fontSize: 30, fontWeight: 400, fontFamily: "Inter" }}
-        >
-          {`Project: ${project.name}`} {/* Отображаем ID проекта */}
-        </Typography>
+        <Typography variant="h4">{project.name}</Typography>
+
         <Button
-          startIcon={<AddIcon sx={{ fontSize: 20 }} />}
+          startIcon={<AddIcon fontSize="small" />}
+          variant="outlined"
+          width="100%"
           sx={{
             p: 1.25,
-            border: "1px solid",
-            borderColor: "divider",
-            borderRadius: 1,
-            color: "text.primary",
-            fontSize: 14,
-            fontFamily: "SB Sans Display",
-            fontWeight: 400,
-            lineHeight: "20px",
+            fontSize: 12,
             textTransform: "none",
             bgcolor: "white",
           }}
@@ -64,47 +56,40 @@ function ProjectOverview() {
           Add document
         </Button>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flex: 1,
-          overflow: "hidden",
-        }}
-      >
+
+      {/* Main Content - исправлены размеры */}
+      <Box display="flex" flex={1} overflow="hidden">
+        {/* Left Panel */}
         <Box
-          sx={{
-            width: "70%",
-            height: "100%",
-            overflowY: "auto",
-            p: 3,
-            display: "flex",
-            flexDirection: "column",
-            gap: 3,
-          }}
+          width="70%"
+          height="100%"
+          overflow="auto"
+          px={3} // Только горизонтальный padding
+          boxSizing="border-box"
+          display="flex"
+          flexDirection="column"
+          gap={3}
         >
           <ProjectProgressCard />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 2,
-              width: "100%",
-            }}
-          >
+
+          <Box display="flex" alignItems="center" gap={2} width="100%">
             <ToggleButtons filterOptions={["List", "Tasks", "Reports"]} />
             <SearchBar />
           </Box>
+
           <DocumentTable />
         </Box>
+
+        {/* Right Panel */}
         <Box
-          sx={{
-            width: "30%",
-            height: "100%",
-            gap: 3,
-            p: 3,
-            flexDirection: "column",
-          }}
+          width="30%"
+          height="100%"
+          px={3} // Только горизонтальный padding
+          boxSizing="border-box"
+          display="flex"
+          flexDirection="column"
+          gap={3}
+          overflow="auto" // Добавляем scroll при необходимости
         >
           <RightPanel />
         </Box>

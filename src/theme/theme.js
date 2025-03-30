@@ -41,7 +41,6 @@ const theme = createTheme({
       fontWeight: 600,
       fontSize: "34px",
       lineHeight: "normal",
-      // padding: "0px 0px 30px 0px",
     },
     h6: {
       fontFamily: "'Inter-Regular', Helvetica",

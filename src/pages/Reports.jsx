@@ -58,7 +58,6 @@ const Reports = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-
           p: 2,
         }}
       >
@@ -941,7 +940,7 @@ const Reports = () => {
         height: "100%",
       }}
     >
-      <Typography variant="h4" sx={{ mb: 3 }}>
+      <Typography variant="h4" mb={6}>
         Reports
       </Typography>
       <Grid container spacing={6} sx={{ maxWidth: "1300px", width: "100%" }}>
