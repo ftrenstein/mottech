@@ -935,12 +935,15 @@ const Reports = () => {
   return (
     <Box
       sx={{
-        display: "flex",
+        // display: "flex",
         width: "100%",
         justifyContent: "center",
         height: "100%",
       }}
     >
+      <Typography variant="h4" sx={{ mb: 3 }}>
+        Reports
+      </Typography>
       <Grid container spacing={6} sx={{ maxWidth: "1300px", width: "100%" }}>
         <Grid item xs={12} sm={6} md={4}>
           {renderCard("Projects amount", projectsAmountContent)}

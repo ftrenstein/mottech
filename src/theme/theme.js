@@ -26,7 +26,8 @@ const theme = createTheme({
     divider: "#e8e8e8",
   },
   typography: {
-    fontFamily: "'Inter', 'Roboto', 'Helvetica', sans-serif",
+    fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    // fontWeight: 600,
     h1: {
       fontFamily: "'Inter-Regular', Helvetica",
       fontWeight: 400,
@@ -34,6 +35,13 @@ const theme = createTheme({
     h2: {
       fontFamily: "'Inter-Regular', Helvetica",
       fontWeight: 400,
+    },
+    h4: {
+      fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      fontWeight: 400,
+      fontSize: "34px",
+      lineHeight: "normal",
+      // padding: "0px 0px 30px 0px",
     },
     body1: {
       fontFamily: "'Inter-Regular', Helvetica",

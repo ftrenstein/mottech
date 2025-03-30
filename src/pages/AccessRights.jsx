@@ -73,7 +73,7 @@ const AccessRights = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 2,
+          mb: 3,
         }}
       >
         <Typography variant="h4">Access Rights</Typography>

@@ -31,7 +31,7 @@ const Documents = () => {
       sx={{ display: "flex", flexDirection: "column", width: "1280px", gap: 2 }}
     >
       {/* Header */}
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 3 }}>
         Documents
       </Typography>
 

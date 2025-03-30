@@ -56,8 +56,7 @@ function Projects() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-
-          mb: 2,
+          mb: 3,
         }}
       >
         <Typography variant="h4">Projects</Typography>

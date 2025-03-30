@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ProjectsOverviewCard from "../components/CardWidgets/ProjectsOverviewCard";
 import DocumentsCard from "../components/CardWidgets/DocumentsCard";
@@ -32,6 +32,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import { Padding } from "@mui/icons-material";
 
 const CardWrapper = ({ id, children }) => {
   const {
@@ -135,7 +136,12 @@ export const Dashboard = () => {
   };
 
   return (
-    <Box sx={{ p: 2, height: "100vh" }}>
+    <Box sx={{ height: "100vh" }}>
+      {/* Header */}
+      <Typography variant="h4" sx={{ mb: 3 }}>
+        Dashboard
+      </Typography>
+
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

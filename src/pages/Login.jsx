@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { TextField, Button, Typography, Box, Paper } from "@mui/material";
-import UniversalButton from "../components/UniversalButton";
-import signInImage from "../assets/sign-in.svg";
+import signInImage from "../assets/sign-in.svg"; // Замените на свою картинку
+import { useAuth } from "../context/AuthContext"; // Импортируйте ваш контекст аутентификации
+import { useNavigate } from "react-router-dom"; // Импортируйте useNavigate из react-router-dom
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState(""); // Add this line
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -22,20 +22,28 @@ const Login = () => {
       alert("Invalid credentials");
     }
   };
+  useEffect(() => {
+    document.body.style.backgroundColor = "black";
+    return () => {
+      document.body.style.backgroundColor = ""; // Восстанавливаем при размонтировании
+    };
+  }, []);
 
   return (
     <Box
       sx={{
         display: "flex",
-        width: "100vw",
+
+        flexDirection: { xs: "column", md: "row" },
         height: "100vh",
-        backgroundColor: "black",
+        maxWidth: "1400px", // Ограничение ширины страницы
+        margin: "0 auto", // Центрируем на больших экранах
       }}
     >
-      {/* Left Section - Form (меньшая часть) */}
+      {/* Левая часть - Форма */}
       <Box
         sx={{
-          width: { xs: "100%", md: "50%" },
+          width: "50%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -50,33 +58,27 @@ const Login = () => {
             width: "100%",
             maxWidth: "400px",
             backgroundColor: "#121212",
-            // bgcolor: "white",
           }}
         >
           <Typography variant="h5" gutterBottom sx={{ color: "white" }}>
-            Welcome back
+            Welcome Back
           </Typography>
           <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-            }}
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
             <TextField
               label="Email"
               name="username"
               variant="outlined"
               fullWidth
-              value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
               sx={{
                 "& .MuiInputLabel-root": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "gray" },
+                  "& fieldset": { borderColor: "white" },
                   "&:hover fieldset": { borderColor: "white" },
                   "&.Mui-focused fieldset": { borderColor: "white" },
                   "& input": { color: "white" },
@@ -90,66 +92,57 @@ const Login = () => {
               variant="outlined"
               fullWidth
               required
+              value={password} // Uncomment this line
+              onChange={(e) => setPassword(e.target.value)} // This will now work
               sx={{
                 "& .MuiInputLabel-root": { color: "white" },
                 "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "gray" },
+                  "& fieldset": { borderColor: "white" },
                   "&:hover fieldset": { borderColor: "white" },
                   "&.Mui-focused fieldset": { borderColor: "white" },
                   "& input": { color: "white" },
                 },
               }}
             />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <UniversalButton type="submit" startIcon={null}>
-                Sign in
-              </UniversalButton>
-              <Button
-                sx={{
-                  color: "#4dabf5",
-                  fontSize: "0.75rem",
-                  fontFamily: "'Inter-Regular', Helvetica",
-                  fontWeight: "normal",
-                }}
-              >
-                Forgot your password?
-              </Button>
-            </Box>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              maxWidthwidth="100%"
+              sx={{
+                border: "0.5px solid white", // Добавляем тонкую белую обводку
+                "&:hover": {
+                  backgroundColor: "#3778a6",
+                },
+              }}
+            >
+              Sign In
+            </Button>
           </Box>
         </Paper>
       </Box>
 
-      {/* Right Section - Image (большая часть) */}
+      {/* Правая часть - Картинка */}
       <Box
         sx={{
-          display: { xs: "none", md: "flex" },
           width: "50%",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "black",
           overflow: "hidden",
         }}
       >
-        <Box
-          sx={{
+        <img
+          src={signInImage}
+          alt="Sign In"
+          style={{
             width: "100%",
             height: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            objectFit: "cover",
+            objectPosition: "center",
           }}
-        >
-          <img
-            src={signInImage}
-            alt="Sign In"
-            style={{
-              width: "600px",
-              height: "100%",
-              // objectFit: "cover",
-              objectPosition: "center",
-            }}
-          />
-        </Box>
+        />
       </Box>
     </Box>
   );

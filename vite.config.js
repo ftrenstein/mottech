@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "https://mot.tech/demo/",
+  base: "https://demo.mot.tech/demo/",
   server: {
     historyApiFallback: true,
   },
