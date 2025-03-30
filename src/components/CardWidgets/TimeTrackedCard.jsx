@@ -1,10 +1,13 @@
 import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+
+import DateSelector from "../DateSelector";
 
 const TimeTrackedCard = ({ data }) => {
   return (
-    <Paper sx={{ p: 2.5, borderRadius: "5px", width: "333px" }}>
+    <Paper
+      sx={{ p: 2.5, borderRadius: "5px", width: "333px", height: "110px" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -14,17 +17,10 @@ const TimeTrackedCard = ({ data }) => {
           gap: 1,
         }}
       >
-        <Typography variant="caption" fontWeight="600">
-          Time tracked
-        </Typography>
-        <Box
-          sx={{ display: "flex", justifyContent: "space-between", gap: 0.5 }}
-        >
-          <Typography variant="period">{data.period}</Typography>
-          <ExpandMore sx={{ fontSize: 15 }} />
-        </Box>
+        <Typography variant="h6">Time tracked</Typography>
+        <DateSelector data={data} />
       </Box>
-      <Typography variant="h4" fontWeight="600" color="#969696">
+      <Typography variant="h4" color="#969696">
         {data.value}
       </Typography>
       <Typography variant="caption">{data.description}</Typography>

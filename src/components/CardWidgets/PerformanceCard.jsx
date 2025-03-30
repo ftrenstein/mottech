@@ -4,11 +4,9 @@ import ellipse from "../../assets/elipse.svg";
 
 const PerformanceCard = ({ data }) => {
   return (
-    <Card sx={{ p: 2.5, height: "auto", borderRadius: "5px", width: "333px" }}>
+    <Card sx={{ p: 2.5, height: "350px", borderRadius: "5px", width: "333px" }}>
       <Stack spacing={2.5}>
-        <Typography variant="h6" fontWeight="600">
-          Performance
-        </Typography>
+        <Typography variant="h6">Performance</Typography>
         {/* Performance Metrics */}
         <Box
           sx={{

@@ -21,36 +21,30 @@ const trainingBlocksData = [
 
 const ModelCard = ({ data }) => {
   return (
-    <Card sx={{ p: 2.5, borderRadius: "5px", height: "auto", width: "333px" }}>
-      <CardContent>
-        <Stack spacing={2.5}>
-          {/* Header section */}
-          <Box display="flex" justifyContent="space-between" width="100%">
-            <Typography
-              variant="h5"
-              fontWeight={600}
-              fontFamily="'Inter-SemiBold', Helvetica"
-            >
-              Model
-            </Typography>
+    <Card sx={{ borderRadius: "5px", height: "350px", width: "333px" }}>
+      <CardContent sx={{ p: 2.5, "&:last-child": { pb: 0 } }}>
+        <Stack spacing={0}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
+            m={0}
+            p={0}
+            mb={3}
+          >
+            <Typography variant="h6">Model</Typography>
 
             <Button
               endIcon={<ExpandMoreIcon sx={{ width: 15, height: 15 }} />}
               sx={{
                 textTransform: "none",
-                p: 0,
                 minWidth: "auto",
               }}
             >
-              <Typography
-                // sx={{theme: theme => ({ color: theme.palette.primary.main })}}
-                variant="period"
-              >
-                English
-              </Typography>
+              <Typography variant="period">English</Typography>
             </Button>
           </Box>
-
           {/* Training visualization section */}
           <Box width="310px">
             <Stack spacing={0.375} sx={{ opacity: 0.87 }}>

@@ -5,11 +5,9 @@ import { useNavigate } from "react-router-dom";
 const DocumentsCard = ({ data }) => {
   const navigate = useNavigate();
   return (
-    <Card sx={{ p: 2.5, height: "auto", borderRadius: "5px", width: "333px" }}>
+    <Card sx={{ p: 2.5, height: "140px", borderRadius: "5px", width: "333px" }}>
       <Stack spacing={2.5}>
-        <Typography variant="h6" fontWeight="600">
-          Documents
-        </Typography>
+        <Typography variant="h6">Documents</Typography>
         <Box>
           <Box
             sx={{
@@ -18,7 +16,7 @@ const DocumentsCard = ({ data }) => {
               alignItems: "center",
             }}
           >
-            <Typography variant="caption" fontWeight="600">
+            <Typography variant="caption" fontWeight="550">
               Last documents
             </Typography>
             <Button

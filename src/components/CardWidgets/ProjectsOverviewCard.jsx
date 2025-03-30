@@ -17,11 +17,9 @@ const ProjectsOverviewCard = ({ data }) => {
   };
 
   return (
-    <Card sx={{ p: 2.5, height: "auto", width: "333px" }}>
+    <Card sx={{ p: 2.5, height: "350px", width: "333px" }}>
       <Stack spacing={2.5}>
-        <Typography variant="h6" fontWeight="600">
-          Projects Overview
-        </Typography>
+        <Typography variant="h6">Projects Overview</Typography>
         {/* Chart */}
         <Box sx={{ height: "148px", position: "relative" }}>
           <Box sx={{ position: "relative", width: 310, height: 59 }}>

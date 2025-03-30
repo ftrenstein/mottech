@@ -38,10 +38,16 @@ const theme = createTheme({
     },
     h4: {
       fontFamily: "'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-      fontWeight: 400,
+      fontWeight: 600,
       fontSize: "34px",
       lineHeight: "normal",
       // padding: "0px 0px 30px 0px",
+    },
+    h6: {
+      fontFamily: "'Inter-Regular', Helvetica",
+      fontWeight: 550,
+      fontSize: "16px",
+      lineHeight: "normal",
     },
     body1: {
       fontFamily: "'Inter-Regular', Helvetica",
