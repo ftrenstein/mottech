@@ -33,17 +33,15 @@ const Login = () => {
     <Box
       sx={{
         display: "flex",
-
         flexDirection: { xs: "column", md: "row" },
         height: "100vh",
-        // maxWidth: "1400px", // Ограничение ширины страницы
+        maxWidth: "1400px", // Ограничение ширины страницы
         margin: "0 auto", // Центрируем на больших экранах
       }}
     >
       {/* Левая часть - Форма */}
       <Box
         sx={{
-          // width: "50%",
           width: { xs: "100%", md: "50%" },
           display: "flex",
           justifyContent: "center",
@@ -126,9 +124,8 @@ const Login = () => {
       {/* Правая часть - Картинка */}
       <Box
         sx={{
-          width: "50%",
-          // display: "flex",
-          display: { xs: "none", md: "flex" },
+          width: { xs: "100%", md: "50%" }, // Adjust width for mobile
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "black",
@@ -139,9 +136,9 @@ const Login = () => {
           src={signInImage}
           alt="Sign In"
           style={{
-            width: "100%",
-            height: "100%",
-            // objectFit: "cover",
+            height: "100%", // Ensure full height
+            width: "auto", // Maintain aspect ratio without cropping
+            objectFit: "contain", // Prevent cropping
             objectPosition: "center",
           }}
         />
