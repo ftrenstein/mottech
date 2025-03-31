@@ -1,45 +1,30 @@
 import React from "react";
-import {
-  Box,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-  styled,
-} from "@mui/material";
-import { translations } from "../data/documentDataOverview";
+import { Box, Paper, Typography, styled } from "@mui/material";
+import { translations } from "../data/documentDataOverview"; // Ensure translations is structured as an array of rows
 import RightPanel from "../components/RightPanel";
 
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+const StyledContainer = styled(Paper)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[300]}`,
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(2),
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(2),
 }));
 
-const HeaderCell = styled(TableCell)(({ theme }) => ({
-  fontWeight: 500,
-  backgroundColor: theme.palette.grey[100],
+const RowContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "row",
+  gap: theme.spacing(2),
+  borderBottom: `1px solid ${theme.palette.grey[300]}`,
+  paddingBottom: theme.spacing(1),
+  marginBottom: theme.spacing(1),
 }));
-
-const TranslationRow = ({ translation }) => {
-  console.log("Rendering row for:", translation); // Debugging log
-  return (
-    <TableRow>
-      <TableCell>
-        <Typography variant="body2">{translation.source}</Typography>
-      </TableCell>
-      <TableCell>
-        <Typography variant="body2">{translation.french}</Typography>
-      </TableCell>
-    </TableRow>
-  );
-};
 
 const DocumentOverview = () => {
+  // Ensure translations is an array of rows
+  const rows = Array.isArray(translations) ? translations : [translations];
+
   return (
     <Box
       sx={{
@@ -48,55 +33,75 @@ const DocumentOverview = () => {
         width: "100%",
         height: "100%",
         gap: 2,
+        mb: 4,
       }}
     >
-      <Typography
-        sx={{ flex: 1, fontSize: 30, fontWeight: 400, fontFamily: "Inter" }}
-      >
-        {` "name"`} {/* Отображаем ID проекта */}
+      <Typography variant="h4" sx={{ ml: 3 }}>
+        {` Default document name`} {/* Display project name */}
       </Typography>
 
       <Box
         sx={{
           display: "flex",
           flex: 1,
-          overflow: "hidden",
+          overflow: "hidden", // Ensure no scrollbars for the entire container
         }}
       >
         <Box
           sx={{
             width: "70%",
-            height: "800px",
-            overflowY: "auto",
+            height: "auto", // Adjust height to fit content
             p: 3,
             display: "flex",
             flexDirection: "column",
             gap: 3,
           }}
         >
-          {translations.length === 0 ? ( // Fallback for empty data
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h6" sx={{ width: "430px" }}>
+              Source
+            </Typography>
+            <Typography variant="h6">Translation</Typography>
+          </Box>
+          {rows.length === 0 ? ( // Fallback for empty data
             <Typography variant="body2" color="textSecondary">
               No translations available.
             </Typography>
           ) : (
-            <StyledTableContainer component={Paper} elevation={0}>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <HeaderCell>Source</HeaderCell>
-                    <HeaderCell>Translation</HeaderCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {translations.map((translation) => (
-                    <TranslationRow
-                      key={translation.id}
-                      translation={translation}
-                    />
-                  ))}
-                </TableBody>
-              </Table>
-            </StyledTableContainer>
+            <StyledContainer>
+              {rows.map((row, index) => (
+                <RowContainer key={index}>
+                  {/* Source Column */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
+                    }}
+                  >
+                    <Typography variant="body2">{row.source}</Typography>
+                  </Box>
+
+                  {/* Translation Column */}
+                  <Box
+                    sx={{
+                      flex: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
+                    }}
+                  >
+                    <Typography variant="body2">{row.portuguese}</Typography>
+                  </Box>
+                </RowContainer>
+              ))}
+            </StyledContainer>
           )}
         </Box>
         <Box

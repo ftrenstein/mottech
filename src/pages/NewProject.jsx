@@ -30,7 +30,7 @@ function NewProject() {
     console.log("New Project Created:", newProject);
 
     // Redirect to the new project's overview page
-    navigate(`/projectOverview/${newProject.id}`);
+    navigate(`/projectOverview/${123}`);
   };
 
   return (

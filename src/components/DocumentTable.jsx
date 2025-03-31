@@ -9,12 +9,31 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { documentData } from "../data/documentDataOverview";
+import { documentData, projects } from "../data/documentDataOverview";
 
-const DocumentTable = () => {
-  const [expandedLanguages, setExpandedLanguages] = useState(
-    Object.keys(documentData[0].languages)
+const DocumentTable = ({ projectId }) => {
+  // Find the selected project
+  const project = projects.find((proj) => proj.id === projectId);
+  console.log("Project ID2:", projectId);
+
+  if (!project) {
+    return (
+      <Typography variant="h6" color="error" textAlign="center" mt={3}>
+        Project not found.
+      </Typography>
+    );
+  }
+  // Get the documents for the selected project
+  const projectDocuments = documentData.filter((doc) =>
+    project.documents.includes(doc.id)
   );
+
+  // Extract unique languages across all project documents
+  const allLanguages = Array.from(
+    new Set(projectDocuments.flatMap((doc) => Object.keys(doc.languages)))
+  );
+
+  const [expandedLanguages, setExpandedLanguages] = useState(allLanguages);
 
   const handleLanguageToggle = (language) => {
     setExpandedLanguages((prev) =>
@@ -34,13 +53,13 @@ const DocumentTable = () => {
     >
       <Box
         display="grid"
-        gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr" // Автоматическое распределение
+        gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr"
         width="100%"
         gap={2}
         mb={3}
         px={3}
       >
-        <Box width={40} /> {/* Placeholder для чекбокса */}
+        <Box width={40} />
         <HeaderCell>Document</HeaderCell>
         <HeaderCell>Current status</HeaderCell>
         <HeaderCell>Statuses overview</HeaderCell>
@@ -48,8 +67,8 @@ const DocumentTable = () => {
         <HeaderCell>Executors</HeaderCell>
       </Box>
 
-      {/* Language Sections */}
-      {Object.keys(documentData[0].languages).map((language) => (
+      {/* Grouped by Languages */}
+      {allLanguages.map((language) => (
         <React.Fragment key={language}>
           <LanguageSelector
             language={language}
@@ -58,14 +77,16 @@ const DocumentTable = () => {
           />
           {expandedLanguages.includes(language) && (
             <Box border={1} borderColor="divider" borderRadius={1} mb={2}>
-              {documentData.map((doc, index) => (
-                <DocumentRow
-                  key={`${language}-${index}`}
-                  document={doc.document}
-                  {...doc.languages[language]}
-                  last={index === documentData.length - 1}
-                />
-              ))}
+              {projectDocuments
+                .filter((doc) => doc.languages[language]) // Filter documents with the current language
+                .map((doc, index) => (
+                  <DocumentRow
+                    key={`${language}-${doc.document}`}
+                    document={doc.document}
+                    {...doc.languages[language]}
+                    last={index === projectDocuments.length - 1}
+                  />
+                ))}
             </Box>
           )}
         </React.Fragment>
@@ -98,6 +119,7 @@ const LanguageSelector = ({ language, expanded, onToggle }) => (
       label={language}
       sx={{
         border: "1px solid",
+        width: "100%",
         borderColor: "divider",
         bgcolor: "background.paper",
         borderRadius: 1,
@@ -125,7 +147,7 @@ const DocumentRow = ({
   return (
     <Box
       display="grid"
-      gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr" // Такие же пропорции как в заголовке
+      gridTemplateColumns="min-content 1fr 0.7fr 0.7fr 0.7fr 0.8fr"
       alignItems="center"
       width="100%"
       height={56}
@@ -134,7 +156,8 @@ const DocumentRow = ({
       sx={{
         backgroundColor: "background.paper",
         "&:hover": {
-          backgroundColor: "action.hover",
+          // backgroundColor: "action.hover",
+          border: "1px solid",
           cursor: "pointer",
         },
       }}
@@ -149,7 +172,17 @@ const DocumentRow = ({
         {status}
       </Typography>
 
-      <Box width={82} display="flex" gap={1}>
+      <Box
+        width={82}
+        display="flex"
+        gap={1}
+        p={1}
+        sx={{
+          borderRadius: 3,
+          border: "1.5px solid",
+          borderColor: "grey.300",
+        }}
+      >
         {progress.map((state, index) => (
           <Box
             key={index}

@@ -15,6 +15,7 @@ function ProjectOverview() {
   const projectId = parseInt(id, 10);
   const project = ongoingData.projects?.find((proj) => proj.id === projectId);
 
+  console.log("Project ID:", projectId);
   if (!project) {
     return (
       <Typography variant="h4" textAlign="center" mt={5}>
@@ -70,14 +71,14 @@ function ProjectOverview() {
           flexDirection="column"
           gap={3}
         >
-          <ProjectProgressCard />
+          <ProjectProgressCard projectId={projectId} />
 
           <Box display="flex" alignItems="center" gap={2} width="100%">
             <ToggleButtons filterOptions={["List", "Tasks", "Reports"]} />
             <SearchBar />
           </Box>
 
-          <DocumentTable />
+          <DocumentTable projectId={projectId} />
         </Box>
 
         {/* Right Panel */}

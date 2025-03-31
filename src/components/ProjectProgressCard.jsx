@@ -111,13 +111,15 @@ import React from "react";
 import { Box, Typography, LinearProgress } from "@mui/material";
 
 const data = [
-  { label: "Linguist verification", value: 8, progress: 30 },
-  { label: "Translation", value: 6, progress: 22 },
-  { label: "Validation", value: 5, progress: 18 },
-  { label: "Design", value: 8, progress: 30 },
+  { label: "Al ", value: 3 },
+  { label: "Linguist verification", value: 0 },
+  { label: "Translation", value: 0 },
+  { label: "Validation", value: 0 },
+  { label: "Design", value: 0 },
 ];
 
-export default function ProjectProgressCard() {
+export default function ProjectProgressCard(projectId) {
+  const total = data.reduce((acc, item) => acc + item.value, 0);
   return (
     <Box
       sx={{
@@ -147,11 +149,6 @@ export default function ProjectProgressCard() {
             <Typography fontSize={12} fontWeight={400} color="black">
               {item.label}
             </Typography>
-            {/* <LinearProgress
-              variant="determinate"
-              value={item.progress}
-              sx={{ width: 64, height: 3, bgcolor: "#E8E8E8", borderRadius: 1 }}
-            /> */}
           </Box>
         ))}
         <Box
@@ -164,7 +161,7 @@ export default function ProjectProgressCard() {
         />
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Typography fontSize={36} fontWeight={600} color="black">
-            10/27
+            0/{total}
           </Typography>
           <Typography fontSize={12} fontWeight={400} color="black">
             Done
@@ -188,5 +185,3 @@ export default function ProjectProgressCard() {
     </Box>
   );
 }
-
-// export default ProjectProgressCard;
