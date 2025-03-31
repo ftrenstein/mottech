@@ -129,7 +129,7 @@ const Reports = () => {
           </Stack>
           <Typography variant="caption">projects created</Typography>
         </Stack>
-        <Stack spacing={1}>
+        <Stack spacing={0} sx={{ mt: 2.5 }}>
           <Stack direction="row" alignItems="center" spacing={0.5}>
             <Typography variant="h4" fontWeight={600}>
               108
@@ -228,7 +228,7 @@ const Reports = () => {
         justifyContent="space-between"
         alignItems="flex-end"
       >
-        <Stack spacing={0}>
+        <Stack spacing={0} sx={{ mt: 2.5 }}>
           <Stack direction="row" alignItems="center" spacing={0.5}>
             <Typography variant="h4" fontWeight={600}>
               343
@@ -803,7 +803,7 @@ const Reports = () => {
               alignItems: "center",
               fontSize: 12,
               textAlign: "left",
-              width: "160px", // Make the button longer
+              width: "130px", // Make the button longer
             }}
           >
             <Typography sx={{ flex: 1, color: "black" }}>English</Typography>
@@ -828,7 +828,7 @@ const Reports = () => {
               alignItems: "center",
               fontSize: 12,
               textAlign: "left",
-              width: "160px", // Make the button longer
+              width: "130px", // Make the button longer
             }}
           >
             <Typography sx={{ flex: 1, color: "black" }}>Spanish</Typography>

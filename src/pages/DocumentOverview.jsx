@@ -53,7 +53,7 @@ const DocumentOverview = () => {
       <Typography
         sx={{ flex: 1, fontSize: 30, fontWeight: 400, fontFamily: "Inter" }}
       >
-        {`Document: "name"`} {/* Отображаем ID проекта */}
+        {` "name"`} {/* Отображаем ID проекта */}
       </Typography>
 
       <Box

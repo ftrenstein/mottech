@@ -36,14 +36,15 @@ const Login = () => {
 
         flexDirection: { xs: "column", md: "row" },
         height: "100vh",
-        maxWidth: "1400px", // Ограничение ширины страницы
+        // maxWidth: "1400px", // Ограничение ширины страницы
         margin: "0 auto", // Центрируем на больших экранах
       }}
     >
       {/* Левая часть - Форма */}
       <Box
         sx={{
-          width: "50%",
+          // width: "50%",
+          width: { xs: "100%", md: "50%" },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -126,7 +127,8 @@ const Login = () => {
       <Box
         sx={{
           width: "50%",
-          display: "flex",
+          // display: "flex",
+          display: { xs: "none", md: "flex" },
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "black",
@@ -139,7 +141,7 @@ const Login = () => {
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
+            // objectFit: "cover",
             objectPosition: "center",
           }}
         />
