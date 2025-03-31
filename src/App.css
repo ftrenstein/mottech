@@ -6,4 +6,10 @@
 /* Для остальных страниц */
 .app-page body {
   background-color: #fafafa !important;
+}
+
+/* input,
+textarea,
+select {
+  background-color: white;
 } */

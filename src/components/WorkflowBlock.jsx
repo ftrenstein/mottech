@@ -8,18 +8,47 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const WorkflowBlock = () => {
-  // Состояние для 5-й кнопки
-  const [isDesignActive, setIsDesignActive] = useState(false);
+const WorkflowButton = ({ label, isActive, onClick }) => (
+  <Button
+    onClick={onClick}
+    sx={{
+      bgcolor: isActive ? "#3778A6" : "white",
+      color: isActive ? "white" : "#3778A6",
+      borderRadius: 1,
+      border: "2px solid #3778A6",
+      textTransform: "none",
+      "&:hover": {
+        bgcolor: isActive ? "#3778A6" : "white",
+      },
+    }}
+  >
+    {label}
+  </Button>
+);
 
-  // Обработчик нажатия на 5-ю кнопку
-  const handleDesignClick = () => {
-    setIsDesignActive(!isDesignActive);
+const WorkflowBlock = () => {
+  const [activeStates, setActiveStates] = useState({
+    aiTranslation: false,
+    linguistVerification: false,
+    translation: false,
+    validation: false,
+    design: false,
+  });
+
+  const toggleState = (key) => {
+    setActiveStates((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const handleRevertClick = () => {
-    setIsDesignActive(false); // Сбрасываем состояние кнопки "Design"
+    setActiveStates({
+      aiTranslation: false,
+      linguistVerification: false,
+      translation: false,
+      validation: false,
+      design: false,
+    });
   };
+
   return (
     <Box
       sx={{
@@ -33,7 +62,7 @@ const WorkflowBlock = () => {
         gap: 3,
       }}
     >
-      {/* Заголовок и описание */}
+      {/* Header */}
       <Box
         sx={{
           display: "flex",
@@ -47,7 +76,6 @@ const WorkflowBlock = () => {
           </Typography>
           <Typography variant="body2" color="textSecondary">
             AI translation, Linguist verification, Translation, Validation,
-            Design
           </Typography>
         </Box>
         <Box sx={{ transform: "rotate(180deg)" }}>
@@ -55,89 +83,25 @@ const WorkflowBlock = () => {
         </Box>
       </Box>
 
-      {/* Кнопки */}
+      {/* Buttons */}
       <Box sx={{ display: "flex", gap: 2 }}>
-        {/* Неактивные кнопки */}
-        <Button
-          disabled
-          sx={{
-            bgcolor: "#C6CFDA",
-            color: "#8191A2",
-            borderRadius: 1,
-            textTransform: "none",
-            "&:disabled": {
-              bgcolor: "#C6CFDA",
-              color: "#8191A2",
-            },
-          }}
-        >
-          AI translation
-        </Button>
-        <Button
-          disabled
-          sx={{
-            bgcolor: "#C6CFDA",
-            color: "#8191A2",
-            borderRadius: 1,
-            textTransform: "none",
-            "&:disabled": {
-              bgcolor: "#C6CFDA",
-              color: "#8191A2",
-            },
-          }}
-        >
-          Linguist verification
-        </Button>
-        <Button
-          disabled
-          sx={{
-            bgcolor: "#C6CFDA",
-            color: "#8191A2",
-            borderRadius: 1,
-            textTransform: "none",
-            "&:disabled": {
-              bgcolor: "#C6CFDA",
-              color: "#8191A2",
-            },
-          }}
-        >
-          Translation
-        </Button>
-        <Button
-          disabled
-          sx={{
-            bgcolor: "#C6CFDA",
-            color: "#8191A2",
-            borderRadius: 1,
-            textTransform: "none",
-            "&:disabled": {
-              bgcolor: "#C6CFDA",
-              color: "#8191A2",
-            },
-          }}
-        >
-          Validation
-        </Button>
-
-        {/* Активная кнопка */}
-        <Button
-          onClick={handleDesignClick}
-          sx={{
-            bgcolor: isDesignActive ? "#3778A6" : "white",
-            color: isDesignActive ? "white" : "#3778A6",
-            borderRadius: 1,
-            border: "2px solid #3778A6",
-            textTransform: "none",
-            "&:hover": {
-              bgcolor: isDesignActive ? "#3778A6" : "white",
-            },
-          }}
-        >
-          Design
-        </Button>
+        {[
+          { key: "aiTranslation", label: "AI translation" },
+          { key: "linguistVerification", label: "Linguist verification" },
+          { key: "translation", label: "Translation" },
+          { key: "validation", label: "Validation" },
+          { key: "design", label: "Design" },
+        ].map(({ key, label }) => (
+          <WorkflowButton
+            key={key}
+            label={label}
+            isActive={activeStates[key]}
+            onClick={() => toggleState(key)}
+          />
+        ))}
       </Box>
 
-      {/* Чекбокс и ссылка */}
+      {/* Checkbox and Link */}
       <Box
         sx={{
           display: "flex",
@@ -163,7 +127,7 @@ const WorkflowBlock = () => {
           sx={{ fontWeight: 500, cursor: "pointer" }}
           onClick={handleRevertClick}
         >
-          Revert to Standard workflow
+          Revert all
         </Typography>
       </Box>
     </Box>

@@ -40,7 +40,7 @@ function NewProject() {
         display: "flex",
         justifyContent: "center", // Центрирование по горизонтали
 
-        bgcolor: "#f5f5f5", // Фон страницы (опционально)
+        // bgcolor: "#f5f5f5", // Фон страницы (опционально)
         maxWidth: "100%", // Чтобы контент не вылезал за пределы экрана
 
         mt: 4, // Отступ сверху
@@ -54,7 +54,7 @@ function NewProject() {
           flexDirection: "column",
           gap: 6,
           p: 8, // Отступы внутри контейнера
-          bgcolor: "background.paper", // Фон контента
+          // bgcolor: "background.paper", // Фон контента
 
           boxShadow: 3, // Тень для контейнера
           // Прижимаем к верху
@@ -67,6 +67,7 @@ function NewProject() {
             display: "flex",
             flexDirection: "column",
             gap: 1,
+            // bgcolor: "black",
           }}
         >
           <Box sx={{ display: "flex", gap: 1 }}>
@@ -80,7 +81,7 @@ function NewProject() {
               Product
             </Typography>
           </Box>
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1, bgcolor: "white" }}>
             <TextField fullWidth placeholder="Brand" sx={{ flex: 1 }} />
             <TextField fullWidth placeholder="Subbrand" sx={{ flex: 1 }} />
             <TextField fullWidth placeholder="Product" sx={{ flex: 1 }} />
@@ -101,7 +102,7 @@ function NewProject() {
             rows={3}
             fullWidth
             placeholder="Description"
-            sx={{ width: 640 }}
+            sx={{ width: "100%", bgcolor: "white" }}
           />
         </Box>
         {/* Info Section */}
@@ -111,6 +112,7 @@ function NewProject() {
             display: "flex",
             flexDirection: "column",
             gap: 1,
+            width: "100%",
           }}
         >
           <Typography variant="body2">Addition info</Typography>
@@ -119,7 +121,7 @@ function NewProject() {
             rows={3}
             fullWidth
             placeholder="Addition info"
-            sx={{ width: 640 }}
+            sx={{ width: "100%", bgcolor: "white" }}
           />
         </Box>
         {/* Coordinator Section */}
@@ -132,7 +134,11 @@ function NewProject() {
           }}
         >
           <Typography variant="body2">Coordinator</Typography>
-          <TextField fullWidth placeholder="Coordinator" sx={{ width: 640 }} />
+          <TextField
+            fullWidth
+            placeholder="Coordinator"
+            sx={{ width: "100%", bgcolor: "white" }}
+          />
         </Box>
         {/* Workflow Section */}
         <WorkflowBlock />
@@ -151,7 +157,7 @@ function NewProject() {
           >
             Cancel
           </Button>
-          <UniversalButton onClick={handleCreateProjectClick}>
+          <UniversalButton onClick={handleCreateProjectClick} startIcon={null}>
             Create project{" "}
           </UniversalButton>
         </Box>
