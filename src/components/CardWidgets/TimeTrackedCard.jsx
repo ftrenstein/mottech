@@ -6,7 +6,13 @@ import DateSelector from "../DateSelector";
 const TimeTrackedCard = ({ data }) => {
   return (
     <Paper
-      sx={{ p: 2.5, borderRadius: "5px", width: "333px", height: "110px" }}
+      sx={{
+        p: 2.5,
+        borderRadius: "5px",
+        mb: 4,
+        width: "333px",
+        height: "110px",
+      }}
     >
       <Box
         sx={{

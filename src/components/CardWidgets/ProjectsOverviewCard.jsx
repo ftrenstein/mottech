@@ -2,6 +2,69 @@ import React from "react";
 import { Box, Card, Stack, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import UniversalButton from "../UniversalButton";
+import { motion } from "framer-motion";
+
+const BarChart = ({ barData }) => (
+  <Box sx={{ position: "relative", width: 310, height: 59 }}>
+    {barData.map((bar, index) => (
+      <motion.div
+        key={index}
+        initial={{
+          opacity: 0, // Начальная непрозрачность (скрыт)
+          width: 0, // Начальная ширина (0)
+          height: 0, // Начальная высота (0)
+          top: `${bar.top}px`, // Начальная позиция сверху
+          left: `${bar.left}px`, // Начальная позиция слева
+        }}
+        animate={{
+          opacity: bar.opacity, // Конечная непрозрачность
+          width: `${bar.width}px`, // Конечная ширина
+          height: `${bar.height}px`, // Конечная высота
+        }}
+        transition={{
+          duration: 0.5, // Быстрая анимация (0.5 секунд)
+          delay: index * 0.1, // Задержка для каждого блока (по порядку)
+          ease: "easeOut", // Плавный выход
+        }}
+        style={{
+          position: "absolute",
+          top: `${bar.top}px`,
+          left: `${bar.left}px`,
+          backgroundColor: "#3778a6",
+          borderRadius: "5px",
+        }}
+      />
+    ))}
+  </Box>
+);
+
+const ProjectStats = ({ inProgress, archived }) => (
+  <Box
+    sx={{
+      display: "flex",
+      width: "333px",
+      height: "63px",
+      gap: "120px",
+      position: "absolute",
+      top: "85px",
+
+      justifyContent: "space-between",
+    }}
+  >
+    <Box sx={{ flex: 1 }}>
+      <Typography variant="h4" fontWeight="600">
+        {inProgress}
+      </Typography>
+      <Typography variant="caption">projects in progress</Typography>
+    </Box>
+    <Box sx={{ flex: 1, justifyContent: "space-between" }}>
+      <Typography variant="h4" fontWeight="400" color="#969696">
+        {archived}
+      </Typography>
+      <Typography variant="caption">archived tasks</Typography>
+    </Box>
+  </Box>
+);
 
 const ProjectsOverviewCard = ({ data }) => {
   const navigate = useNavigate();
@@ -17,54 +80,13 @@ const ProjectsOverviewCard = ({ data }) => {
   };
 
   return (
-    <Card sx={{ p: 2.5, height: "350px", width: "333px" }}>
+    <Card sx={{ p: 2.5, height: "350px", width: "333px", mb: 4 }}>
       <Stack spacing={2.5}>
         <Typography variant="h6">Projects Overview</Typography>
-        {/* Chart */}
         <Box sx={{ height: "148px", position: "relative" }}>
-          <Box sx={{ position: "relative", width: 310, height: 59 }}>
-            {barData.map((bar, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: `${bar.width}px`,
-                  height: `${bar.height}px`,
-                  position: "absolute",
-                  top: `${bar.top}px`,
-                  left: `${bar.left}px`,
-                  opacity: bar.opacity,
-                  backgroundColor: "#3778a6",
-                  borderRadius: "5px",
-                }}
-              />
-            ))}
-            {/* </Box> */}
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              width: "333px",
-              height: "63px",
-              gap: "18px",
-              position: "absolute",
-              top: "85px",
-            }}
-          >
-            <Box sx={{ flex: 1 }}>
-              <Typography variant="h4" fontWeight="600">
-                {data.inProgress}
-              </Typography>
-              <Typography variant="caption">projects in progress</Typography>
-            </Box>
-            <Box sx={{ flex: 1 }}>
-              <Typography variant="h4" fontWeight="400" color="#969696">
-                {data.archived}
-              </Typography>
-              <Typography variant="caption">archived tasks</Typography>
-            </Box>
-          </Box>
+          <BarChart barData={barData} />
+          <ProjectStats inProgress={data.inProgress} archived={data.archived} />
         </Box>
-
         <Box>
           <Box
             sx={{
@@ -97,7 +119,6 @@ const ProjectsOverviewCard = ({ data }) => {
             ))}
           </Stack>
         </Box>
-        {/* Create Task Button */}
         <UniversalButton onClick={handleNewProjectClick}>
           New project
         </UniversalButton>

@@ -9,6 +9,7 @@ const DiscussionCard = ({ data }) => {
         borderRadius: "5px",
         width: 333,
         boxSizing: "border-box",
+        mb: 4,
       }}
     >
       <Stack>

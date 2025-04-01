@@ -1,0 +1,269 @@
+[
+  {
+    "id": 1,
+    "name": "Royal Canin - Veterinary Nutrition - Dog Food - Hypoallergenic Formula",
+    "starting_date": "2023-10-23T16:10:00Z",
+    "total_languages": 9,
+    "total_documents": 10,
+    "completed": 59,
+    "ai_translation": 4,
+    "linguist_verification": 6,
+    "translation": 6,
+    "validation": 5,
+    "design": 6,
+    "documents": [
+      {
+        "id": 1,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - French",
+        "status": "Verified by linguist",
+        "due_date": "as soon as possible",
+        "executors": "",
+        "category": "MARKETING",
+        "languages": ["French", "English", "Spanish"]
+      },
+      {
+        "id": 2,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - German",
+        "status": "On AI translation",
+        "due_date": "as soon as possible",
+        "executors": "mot tech",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["German", "English", "Italian"]
+      },
+      {
+        "id": 3,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - German",
+        "status": "On translation",
+        "due_date": "Thu, 26 Oct 2023 20:30",
+        "executors": "h.aveline",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["German", "English", "Spanish"]
+      },
+      {
+        "id": 4,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - Spanish",
+        "status": "On linguist verification",
+        "due_date": "as soon as possible",
+        "executors": "mot tech",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["Spanish", "English", "French"]
+      },
+      {
+        "id": 5,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - Spanish",
+        "status": "On validation",
+        "due_date": "Wed, 01 Nov 2023 16:20",
+        "executors": "t.alexandre",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["Spanish", "English", "Italian"]
+      },
+      {
+        "id": 6,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - Italian",
+        "status": "On designing",
+        "due_date": "Fri, 27 Oct 2023 06:00",
+        "executors": "k.sebastien",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["Italian", "English", "French"]
+      },
+      {
+        "id": 7,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - Dutch",
+        "status": "On AI translation",
+        "due_date": "as soon as possible",
+        "executors": "mot tech",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["Dutch", "English", "German"]
+      },
+      {
+        "id": 8,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - Dutch",
+        "status": "On translation",
+        "due_date": "Fri, 27 Oct 2023 10:10",
+        "executors": "l.gauthier",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["Dutch", "English", "Spanish"]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Dior Parfums - Fragrance Line - J’adore - Special Edition",
+    "starting_date": "2023-12-05T10:30:00Z",
+    "total_languages": 8,
+    "total_documents": 60,
+    "completed": 40,
+    "ai_translation": 6,
+    "linguist_verification": 6,
+    "translation": 3,
+    "validation": 4,
+    "design": 1
+  },
+  {
+    "id": 3,
+    "name": "Éditions Louis Vuitton - Travel Books - Paris Edition - Collector's Item",
+    "starting_date": "2023-11-15T09:45:00Z",
+    "total_languages": 11,
+    "total_documents": 80,
+    "completed": 38,
+    "ai_translation": 12,
+    "linguist_verification": 12,
+    "translation": 3,
+    "validation": 12,
+    "design": 0
+  },
+  {
+    "id": 4,
+    "name": "Fondation Louis Vuitton - Art Exhibitions - Contemporary Masters - Interactive Tour",
+    "starting_date": "2023-09-29T14:20:00Z",
+    "total_languages": 11,
+    "total_documents": 70,
+    "completed": 65,
+    "ai_translation": 0,
+    "linguist_verification": 10,
+    "translation": 8,
+    "validation": 7,
+    "design": 5
+  },
+  {
+    "id": 5,
+    "name": "Musée de l’Armée - Historical Archives - War Memoirs - Digital Collection",
+    "starting_date": "2023-10-12T08:15:00Z",
+    "total_languages": 10,
+    "total_documents": 85,
+    "completed": 72,
+    "ai_translation": 0,
+    "linguist_verification": 6,
+    "translation": 7,
+    "validation": 5,
+    "design": 7
+  },
+  {
+    "id": 6,
+    "name": "Hermès - Leather Goods - Birkin Bag - Exotic Skins Collection",
+    "starting_date": "2023-11-08T13:40:00Z",
+    "total_languages": 10,
+    "total_documents": 90,
+    "completed": 73,
+    "ai_translation": 0,
+    "linguist_verification": 7,
+    "translation": 8,
+    "validation": 6,
+    "design": 7
+  },
+  {
+    "id": 7,
+    "name": "Laboratoires Servier - Pharmaceuticals - Cardiovascular Care - Clinical Research",
+    "starting_date": "2023-11-18T17:25:00Z",
+    "total_languages": 10,
+    "total_documents": 95,
+    "completed": 74,
+    "ai_translation": 0,
+    "linguist_verification": 9,
+    "translation": 7,
+    "validation": 8,
+    "design": 7
+  },
+  {
+    "id": 123,
+    "name": "default",
+    "starting_date": "2023-10-23T16:10:00Z",
+    "total_languages": 3,
+    "total_documents": 3,
+    "completed": 0,
+    "ai_translation": 0,
+    "linguist_verification": 0,
+    "translation": 0,
+    "validation": 0,
+    "design": 0,
+    "documents": [
+      {
+        "id": 1,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - French",
+        "status": "Verified by linguist",
+        "due_date": "as soon as possible",
+        "executors": "",
+        "category": "MARKETING",
+        "languages": ["French", "English", "Spanish"],
+        "languages_details": {
+          "French": {
+            "status": "On validation",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, true, "partial", false]
+          },
+          "English": {
+            "status": "Verified by linguist",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, "partial", false, false]
+          },
+          "German": {
+            "status": "Preparing for AI translation",
+            "date": "As soon as possible",
+            "executors": ["M"],
+            "progress": ["partial", false, false, false, false]
+          }
+        }
+      },
+      {
+        "id": 2,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - German",
+        "status": "On AI translation",
+        "due_date": "as soon as possible",
+        "executors": "mot tech",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["German", "English", "Italian"],
+        "languages_details": {
+          "German": {
+            "status": "On AI translation",
+            "date": "As soon as possible",
+            "executors": ["M"],
+            "progress": ["partial", false, false, false, false]
+          },
+          "English": {
+            "status": "Verified by linguist",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, "partial", false, false]
+          },
+          "Italian": {
+            "status": "On validation",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, true, "partial", false]
+          }
+        }
+      },
+      {
+        "id": 3,
+        "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - German",
+        "status": "On translation",
+        "due_date": "Thu, 26 Oct 2023 20:30",
+        "executors": "h.aveline",
+        "category": "PRODUCT DESCRIPTION",
+        "languages": ["German", "English", "Spanish"],
+        "languages_details": {
+          "German": {
+            "status": "On translation",
+            "date": "Thu, 26 Oct 2023 20:30",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, true, "partial", false]
+          },
+          "English": {
+            "status": "Verified by linguist",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, "partial", false, false]
+          },
+          "Spanish": {
+            "status": "On validation",
+            "date": "Tue, 21 Nov 2023 08:26",
+            "executors": ["KK", "KK"],
+            "progress": [true, true, true, false, false]
+          }
+        }
+      }
+    ]
+  }
+]

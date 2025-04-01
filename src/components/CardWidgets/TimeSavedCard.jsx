@@ -4,7 +4,15 @@ import DateSelector from "../DateSelector";
 
 const TimeSavedCard = ({ data }) => {
   return (
-    <Card sx={{ p: 2.5, borderRadius: "5px", width: "333px", height: "110px" }}>
+    <Card
+      sx={{
+        p: 2.5,
+        borderRadius: "5px",
+        mb: 4,
+        width: "333px",
+        height: "110px",
+      }}
+    >
       <Box
         sx={{
           display: "flex",

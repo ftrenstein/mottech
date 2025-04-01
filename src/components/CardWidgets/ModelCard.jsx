@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { motion } from "framer-motion";
 
 // Data for the training blocks
 const trainingBlocksData = [
@@ -21,7 +22,9 @@ const trainingBlocksData = [
 
 const ModelCard = ({ data }) => {
   return (
-    <Card sx={{ borderRadius: "5px", height: "350px", width: "333px" }}>
+    <Card
+      sx={{ borderRadius: "5px", height: "100%", mb: 4, width: "333px", p: 3 }}
+    >
       <CardContent sx={{ p: 2.5, "&:last-child": { pb: 0 } }}>
         <Stack spacing={0}>
           <Box
@@ -37,28 +40,36 @@ const ModelCard = ({ data }) => {
 
             <Button
               endIcon={<ExpandMoreIcon sx={{ width: 15, height: 15 }} />}
-              sx={{
-                textTransform: "none",
-                minWidth: "auto",
-              }}
+              sx={{ textTransform: "none", minWidth: "auto" }}
             >
               <Typography variant="period">English</Typography>
             </Button>
           </Box>
+
           {/* Training visualization section */}
           <Box width="310px">
             <Stack spacing={0.375} sx={{ opacity: 0.87 }}>
               {trainingBlocksData.map((row, rowIndex) => (
                 <Stack key={`row-${rowIndex}`} direction="row" spacing={0.375}>
                   {row.map((opacity, blockIndex) => (
-                    <Box
+                    <motion.div
                       key={`block-${rowIndex}-${blockIndex}`}
-                      width={28}
-                      height={28}
-                      bgcolor="#3778a6"
-                      borderRadius="5px"
-                      sx={{ opacity }}
-                    />
+                      initial={{ opacity: 0, x: -20, scale: 0.9 }} // Начальное состояние (скрыт, левее)
+                      animate={{ opacity, x: 0, scale: 1 }} // Анимация появления
+                      transition={{
+                        duration: 0.03,
+                        delay: (rowIndex * 10 + blockIndex) * 0.01,
+                        ease: "easeOut",
+                      }}
+                    >
+                      <Box
+                        width={28}
+                        height={28}
+                        bgcolor="#3778a6"
+                        borderRadius="5px"
+                        sx={{ opacity }}
+                      />
+                    </motion.div>
                   ))}
                 </Stack>
               ))}
