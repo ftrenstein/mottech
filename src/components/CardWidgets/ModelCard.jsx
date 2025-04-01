@@ -25,7 +25,7 @@ const ModelCard = ({ data }) => {
     <Card
       sx={{ borderRadius: "5px", height: "100%", mb: 4, width: "333px", p: 3 }}
     >
-      <CardContent sx={{ p: 2.5, "&:last-child": { pb: 0 } }}>
+      <CardContent sx={{ p: 2.5 }}>
         <Stack spacing={0}>
           <Box
             display="flex"

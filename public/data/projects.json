@@ -17,72 +17,80 @@
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - French",
         "status": "Verified by linguist",
         "due_date": "as soon as possible",
-        "executors": "",
+        "executors": ["KK", "KK"],
         "category": "MARKETING",
-        "languages": ["French", "English", "Spanish"]
+        "languages": ["French", "English", "Spanish"],
+        "progress": [true, "partial", false, false, false]
       },
       {
         "id": 2,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - German",
         "status": "On AI translation",
         "due_date": "as soon as possible",
-        "executors": "mot tech",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["German", "English", "Italian"]
+        "languages": ["German", "English", "Italian"],
+        "progress": ["partial", false, false, false, false]
       },
       {
         "id": 3,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - German",
         "status": "On translation",
         "due_date": "Thu, 26 Oct 2023 20:30",
-        "executors": "h.aveline",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["German", "English", "Spanish"]
+        "languages": ["German", "English", "Spanish"],
+        "progress": [true, true, "partial", false, false]
       },
       {
         "id": 4,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - Spanish",
         "status": "On linguist verification",
         "due_date": "as soon as possible",
-        "executors": "mot tech",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["Spanish", "English", "French"]
+        "languages": ["Spanish", "English", "French"],
+        "progress": [true, "partial", false, false, false]
       },
       {
         "id": 5,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - Spanish",
         "status": "On validation",
         "due_date": "Wed, 01 Nov 2023 16:20",
-        "executors": "t.alexandre",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["Spanish", "English", "Italian"]
+        "languages": ["Spanish", "English", "Italian"],
+        "progress": [true, true, true, "partial", false]
       },
       {
         "id": 6,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - Italian",
         "status": "On designing",
         "due_date": "Fri, 27 Oct 2023 06:00",
-        "executors": "k.sebastien",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["Italian", "English", "French"]
+        "languages": ["Italian", "English", "French"],
+        "progress": [true, true, true, true, "partial"]
       },
       {
         "id": 7,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - Dutch",
         "status": "On AI translation",
         "due_date": "as soon as possible",
-        "executors": "mot tech",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["Dutch", "English", "German"]
+        "languages": ["Dutch", "English", "German"],
+        "progress": ["partial", false, false, false, false]
       },
       {
         "id": 8,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - Dutch",
         "status": "On translation",
         "due_date": "Fri, 27 Oct 2023 10:10",
-        "executors": "l.gauthier",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
-        "languages": ["Dutch", "English", "Spanish"]
+        "languages": ["Dutch", "English", "Spanish"],
+        "progress": [true, true, "partial", false, false]
       }
     ]
   },
@@ -171,7 +179,7 @@
     "total_languages": 3,
     "total_documents": 3,
     "completed": 0,
-    "ai_translation": 0,
+    "ai_translation": 3,
     "linguist_verification": 0,
     "translation": 0,
     "validation": 0,
@@ -182,50 +190,51 @@
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - User Guide - French",
         "status": "Verified by linguist",
         "due_date": "as soon as possible",
-        "executors": "",
+        "executors": ["KK", "KK"],
         "category": "MARKETING",
         "languages": ["French", "English", "Spanish"],
         "languages_details": {
           "French": {
             "status": "On validation",
             "date": "Tue, 21 Nov 2023 08:26",
-            "executors": ["KK", "KK"],
+            "executors": ["KS", "JS"],
             "progress": [true, true, true, "partial", false]
           },
           "English": {
             "status": "Verified by linguist",
             "date": "Tue, 21 Nov 2023 08:26",
-            "executors": ["KK", "KK"],
-            "progress": [true, true, "partial", false, false]
+            "executors": ["MK", "GO", "LH"],
+            "progress": [true, "partial", false, false, false]
           },
           "German": {
             "status": "Preparing for AI translation",
             "date": "As soon as possible",
-            "executors": ["M"],
+            "executors": ["KK", "KK"],
             "progress": ["partial", false, false, false, false]
           }
-        }
+        },
+        "progress": [true, "partial", false, false, false]
       },
       {
         "id": 2,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Product Label - German",
         "status": "On AI translation",
         "due_date": "as soon as possible",
-        "executors": "mot tech",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
         "languages": ["German", "English", "Italian"],
         "languages_details": {
           "German": {
             "status": "On AI translation",
             "date": "As soon as possible",
-            "executors": ["M"],
+            "executors": ["KK", "KK"],
             "progress": ["partial", false, false, false, false]
           },
           "English": {
             "status": "Verified by linguist",
             "date": "Tue, 21 Nov 2023 08:26",
             "executors": ["KK", "KK"],
-            "progress": [true, true, "partial", false, false]
+            "progress": [true, "partial", false, false, false]
           },
           "Italian": {
             "status": "On validation",
@@ -233,14 +242,15 @@
             "executors": ["KK", "KK"],
             "progress": [true, true, true, "partial", false]
           }
-        }
+        },
+        "progress": ["partial", false, false, false, false]
       },
       {
         "id": 3,
         "name": "Veterinary Nutrition - Dog Food - Hypoallergenic - Marketing Brochure - German",
         "status": "On translation",
         "due_date": "Thu, 26 Oct 2023 20:30",
-        "executors": "h.aveline",
+        "executors": ["KK", "KK"],
         "category": "PRODUCT DESCRIPTION",
         "languages": ["German", "English", "Spanish"],
         "languages_details": {
@@ -248,21 +258,22 @@
             "status": "On translation",
             "date": "Thu, 26 Oct 2023 20:30",
             "executors": ["KK", "KK"],
-            "progress": [true, true, true, "partial", false]
+            "progress": [true, true, "partial", false, false]
           },
           "English": {
             "status": "Verified by linguist",
             "date": "Tue, 21 Nov 2023 08:26",
             "executors": ["KK", "KK"],
-            "progress": [true, true, "partial", false, false]
+            "progress": [true, "partial", false, false, false]
           },
           "Spanish": {
             "status": "On validation",
             "date": "Tue, 21 Nov 2023 08:26",
             "executors": ["KK", "KK"],
-            "progress": [true, true, true, false, false]
+            "progress": [true, true, true, "partial", false]
           }
-        }
+        },
+        "progress": [true, true, "partial", false, false]
       }
     ]
   }

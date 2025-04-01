@@ -18,7 +18,8 @@ const TimeSavedCard = ({ data }) => {
           display: "flex",
           justifyContent: "space-between",
           mb: 1.25,
-          width: "100%",
+          width: "95%",
+          alignItems: "center",
         }}
       >
         <Typography variant="h6">Time saved</Typography>

@@ -19,8 +19,9 @@ const TimeTrackedCard = ({ data }) => {
           display: "flex",
           justifyContent: "space-between",
           mb: 1.25,
-          width: "100%",
-          gap: 1,
+          width: "95%",
+
+          alignItems: "center",
         }}
       >
         <Typography variant="h6">Time tracked</Typography>

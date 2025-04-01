@@ -12,8 +12,11 @@ import ListDoc from "../components/List";
 import ongoingData from "../data/Ongoindata";
 import UniversalButton from "../components/UniversalButton";
 import { useNavigate } from "react-router-dom";
+import { useProjectContext } from "../context/ProjectContext";
 
 function Projects() {
+  const { projects, addProject, deleteProject, isLoading } =
+    useProjectContext();
   const navigate = useNavigate();
   // const [projects, setProjects] = React.useState(ongoingData.projects);
   const barData = React.useMemo(
@@ -27,7 +30,10 @@ function Projects() {
     []
   );
   const [filter, setFilter] = React.useState("ongoing");
-  console.log("Ongoing Data Projects:", ongoingData.projects);
+  // if (isLoading) return <p>Загрузка проектов...</p>;
+
+  console.log("Ongoing Projects:", ongoingData.projects);
+  console.log("Projects:", projects);
   const handleFilterChange = (event, newFilter) => {
     if (newFilter !== null) {
       setFilter(newFilter);
@@ -159,7 +165,7 @@ function Projects() {
             "Completed",
             "Total docs",
           ]}
-          rows={ongoingData.projects.map((project) => ({
+          rows={projects.map((project) => ({
             id: project.id,
             name: project.name,
             starting_date: project.starting_date,

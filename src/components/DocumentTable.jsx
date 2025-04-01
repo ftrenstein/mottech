@@ -9,28 +9,35 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { documentData, projects } from "../data/documentDataOverview";
+// import { documentData, projects } from "../data/documentDataOverview";
+import { useProjectContext } from "../context/ProjectContext";
 
 const DocumentTable = ({ projectId }) => {
+  const { projects, addProject, deleteProject, isLoading } =
+    useProjectContext();
   // Find the selected project
   const project = projects.find((proj) => proj.id === projectId);
-  console.log("Project ID2:", projectId);
+  console.log("Project ID2 :", projectId);
 
-  if (!project) {
+  if (!project || !project.documents) {
     return (
-      <Typography variant="h6" color="error" textAlign="center" mt={3}>
-        Project not found.
+      <Typography variant="h6" textAlign="center" mt={3}>
+        Documents not found.
       </Typography>
     );
   }
+  console.log("Project ID2 doc table:", project);
+
   // Get the documents for the selected project
-  const projectDocuments = documentData.filter((doc) =>
-    project.documents.includes(doc.id)
-  );
+  const projectDocuments = project.documents.map((doc) => ({
+    ...doc,
+    languages: doc.languages || [], // Ensure languages is an array
+  }));
+  console.log("Project documents:", projectDocuments);
 
   // Extract unique languages across all project documents
   const allLanguages = Array.from(
-    new Set(projectDocuments.flatMap((doc) => Object.keys(doc.languages)))
+    new Set(projectDocuments.flatMap((doc) => doc.languages))
   );
 
   const [expandedLanguages, setExpandedLanguages] = useState(allLanguages);
@@ -78,12 +85,17 @@ const DocumentTable = ({ projectId }) => {
           {expandedLanguages.includes(language) && (
             <Box border={1} borderColor="divider" borderRadius={1} mb={2}>
               {projectDocuments
-                .filter((doc) => doc.languages[language]) // Filter documents with the current language
+                .filter((doc) => doc.languages.includes(language)) // Filter documents with the current language
                 .map((doc, index) => (
                   <DocumentRow
-                    key={`${language}-${doc.document}`}
-                    document={doc.document}
-                    {...doc.languages[language]}
+                    key={`${language}-${doc.id || "unknown"}-${index}`} // Ensure unique key
+                    document={doc.name || "Untitled Document"} // Use 'name' for the document name
+                    status={doc.status || "Unknown Status"} // Use 'status' for the document status
+                    date={doc.due_date || "No Due Date"} // Use 'due_date' for the due date
+                    executors={
+                      Array.isArray(doc.executors) ? doc.executors : []
+                    } // Ensure executors is an array
+                    progress={doc.progress || []} // Ensure progress is passed correctly
                     last={index === projectDocuments.length - 1}
                   />
                 ))}
@@ -141,9 +153,11 @@ const DocumentRow = ({
   status,
   date,
   executors,
-  progress = [],
+  progress = [], // Ensure progress is passed correctly
   last,
 }) => {
+  const executorList = Array.isArray(executors) ? executors : []; // Ensure executors is an array
+
   return (
     <Box
       display="grid"
@@ -156,7 +170,6 @@ const DocumentRow = ({
       sx={{
         backgroundColor: "background.paper",
         "&:hover": {
-          // backgroundColor: "action.hover",
           border: "1px solid",
           cursor: "pointer",
         },
@@ -172,6 +185,7 @@ const DocumentRow = ({
         {status}
       </Typography>
 
+      {/* Statuses overview */}
       <Box
         width={82}
         display="flex"
@@ -183,25 +197,31 @@ const DocumentRow = ({
           borderColor: "grey.300",
         }}
       >
-        {progress.map((state, index) => (
-          <Box
-            key={index}
-            width={12}
-            height={12}
-            borderRadius="50%"
-            sx={{
-              backgroundColor:
-                state === true
-                  ? "#3778A6"
-                  : state === "partial"
-                  ? "white"
-                  : "grey.200",
-              border: state === "partial" ? "1.5px solid" : "none",
-              borderColor: state === "partial" ? "#3778A6" : "transparent",
-              opacity: state === true ? 0.89 : 1,
-            }}
-          />
-        ))}
+        {progress.length > 0 ? (
+          progress.map((state, index) => (
+            <Box
+              key={index}
+              width={12}
+              height={12}
+              borderRadius="50%"
+              sx={{
+                backgroundColor:
+                  state === true
+                    ? "#3778A6"
+                    : state === "partial"
+                    ? "white"
+                    : "grey.200",
+                border: state === "partial" ? "1.5px solid" : "none",
+                borderColor: state === "partial" ? "#3778A6" : "transparent",
+                opacity: state === true ? 0.89 : 1,
+              }}
+            />
+          ))
+        ) : (
+          <Typography variant="caption" color="text.secondary">
+            No data
+          </Typography>
+        )}
       </Box>
 
       <Typography
@@ -215,7 +235,7 @@ const DocumentRow = ({
       </Typography>
 
       <Box width={108} display="flex" gap={1}>
-        {executors.map((initial, index) => (
+        {executorList.map((initial, index) => (
           <Avatar
             key={index}
             sx={{

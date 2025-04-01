@@ -5,32 +5,66 @@ import UniversalButton from "../components/UniversalButton";
 import FileUploadBlock from "../components/FileUploadBlock";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useProjectContext } from "../context/ProjectContext";
 
 function NewProject() {
+  const { projects, addProject, deleteProject, isLoading } =
+    useProjectContext();
   const navigate = useNavigate();
+  const [brand, setBrand] = useState("");
+  const [subbrand, setSubbrand] = useState("");
+  const [product, setProduct] = useState("");
   const [projectName, setProjectName] = useState("New project");
-  const [projects, setProjects] = useState([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]); // State to store files and their languages
+
+  const handleFieldChange = () => {
+    setProjectName(`${brand} ${subbrand} ${product}`.trim());
+  };
 
   const handleCancelProjectClick = () => {
     navigate("/projects");
   };
+
   const handleCreateProjectClick = () => {
-    // Simulate creating a new project
     const newProject = {
       id: Date.now(), // Unique ID for the project
-      name: projectName,
-      starting_date: new Date().toISOString().split("T")[0],
-      total_languages: 1,
-      completed: "0%",
-      total_documents: 0,
+      name: projectName || "New project",
+      starting_date: new Date().toISOString(),
+      total_languages: uploadedFiles.reduce(
+        (acc, file) => acc + file.languages.length,
+        0
+      ),
+      total_documents: uploadedFiles.length,
+      completed: 0, // Default value
+      ai_translation: 0, // Default value
+      linguist_verification: 0, // Default value
+      translation: 0, // Default value
+      validation: 0, // Default value
+      design: 0, // Default value
+      documents: uploadedFiles.map((file) => ({
+        id: file.id,
+        name: file.file.name,
+        due_date: new Date(Date.now() + 259200000).toLocaleString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }), // Today + 3 days
+        status: "On AI translation",
+        languages: file.languages,
+        created_at: new Date().toISOString(),
+        description: "",
+        coordinator: "",
+        progress: ["partial", false, false, false, false],
+      })),
     };
-    setProjects([...projects, newProject]);
 
-    // Save the project (e.g., update state or send to backend)
+    addProject(newProject);
+
     console.log("New Project Created:", newProject);
 
-    // Redirect to the new project's overview page
-    navigate(`/projectOverview/${123}`);
+    navigate(`/projectOverview/${newProject.id}`);
   };
 
   return (
@@ -82,9 +116,36 @@ function NewProject() {
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1, bgcolor: "white" }}>
-            <TextField fullWidth placeholder="Brand" sx={{ flex: 1 }} />
-            <TextField fullWidth placeholder="Subbrand" sx={{ flex: 1 }} />
-            <TextField fullWidth placeholder="Product" sx={{ flex: 1 }} />
+            <TextField
+              fullWidth
+              placeholder="Brand"
+              sx={{ flex: 1 }}
+              value={brand}
+              onChange={(e) => {
+                setBrand(e.target.value);
+                handleFieldChange();
+              }}
+            />
+            <TextField
+              fullWidth
+              placeholder="Subbrand"
+              sx={{ flex: 1 }}
+              value={subbrand}
+              onChange={(e) => {
+                setSubbrand(e.target.value);
+                handleFieldChange();
+              }}
+            />
+            <TextField
+              fullWidth
+              placeholder="Product"
+              sx={{ flex: 1 }}
+              value={product}
+              onChange={(e) => {
+                setProduct(e.target.value);
+                handleFieldChange();
+              }}
+            />
           </Box>
         </Box>
         {/* Description Section */}
@@ -143,7 +204,7 @@ function NewProject() {
         {/* Workflow Section */}
         <WorkflowBlock />
         {/* Documents Section */}
-        <FileUploadBlock />
+        <FileUploadBlock onFilesChange={setUploadedFiles} />
         {/* Buttons Section */}
         <Box sx={{ display: "flex", gap: 2, justifyContent: "flex-end" }}>
           <Button

@@ -9,13 +9,16 @@ import DocumentTable from "../components/DocumentTable";
 import ToggleButtons from "../components/ToggleButtons";
 import RightPanel from "../components/RightPanel";
 import ongoingData from "../data/Ongoindata";
+import { useProjectContext } from "../context/ProjectContext";
 
 function ProjectOverview() {
+  const { projects, addProject, deleteProject, isLoading } =
+    useProjectContext();
   const { id } = useParams();
   const projectId = parseInt(id, 10);
-  const project = ongoingData.projects?.find((proj) => proj.id === projectId);
+  const project = projects?.find((proj) => proj.id === projectId);
 
-  console.log("Project ID:", projectId);
+  console.log("Project ID overview:", projectId);
   if (!project) {
     return (
       <Typography variant="h4" textAlign="center" mt={5}>
@@ -71,7 +74,7 @@ function ProjectOverview() {
           flexDirection="column"
           gap={3}
         >
-          <ProjectProgressCard projectId={projectId} />
+          <ProjectProgressCard id={projectId} />
 
           <Box display="flex" alignItems="center" gap={2} width="100%">
             <ToggleButtons filterOptions={["List", "Tasks", "Reports"]} />

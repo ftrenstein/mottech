@@ -10,6 +10,7 @@ import ModelCard from "../components/CardWidgets/ModelCard";
 import DiscussionCard from "../components/CardWidgets/DiscussionCard";
 import IncomingProjectsCard from "../components/CardWidgets/IncomingProjectsCard";
 import Masonry from "react-masonry-css";
+import { Link } from "react-router-dom";
 
 import {
   projectsData,
@@ -43,28 +44,55 @@ const CardWrapper = ({ id, children }) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    cursor: isDragging ? "grabbing" : "grab",
+    cursor: isDragging ? "grabbing" : "pointer",
     position: "relative",
+    zIndex: isDragging ? 1000 : "auto",
   };
 
   return (
-    <Box ref={setNodeRef} style={style} {...attributes}>
+    <Box
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      sx={{
+        position: "relative", // Убедимся, что родитель имеет relative positioning
+        // "&:hover": {
+        //   boxShadow: "0px 3px 5px rgba(0,0,0,0.2)", // Визуальный эффект при наведении
+        // },
+      }}
+    >
       <Box
         {...listeners}
         sx={{
           position: "absolute",
-          top: 5,
-          right: 5,
-          width: 20,
-          height: 20,
+          top: 10,
+          right: 10,
+          width: 30,
+          height: 30,
           cursor: "grab",
-          backgroundColor: "rgba(151, 146, 146, 0.1)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          overflow: "hidden", // Ensure the icon stays within the card boundaries
+          maxWidth: "90%", // Prevent the icon from exceeding the container width
+          maxHeight: "90%", // Prevent the icon from exceeding the container height
+
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+          },
+          zIndex: 2,
         }}
       >
-        <DragIndicatorIcon sx={{ color: "grey" }} />
+        <DragIndicatorIcon
+          sx={{
+            color: "grey",
+            fontSize: "16px",
+            width: "90%", // Заставляем иконку занимать всю ширину контейнера
+            height: "100%", // Заставляем иконку занимать всю высоту контейнера
+            padding: "4px", // Добавляем отступы внутри контейнера
+            boxSizing: "border-box", // Учитываем padding в размерах
+          }}
+        />
       </Box>
       {children}
     </Box>
@@ -80,43 +108,58 @@ export const Dashboard = () => {
     {
       id: "1",
       component: <ProjectsOverviewCard data={projectsData} />,
-      size: "large",
     },
     {
       id: "2",
       component: <DocumentsCard data={documentData} />,
-      size: "small",
     },
     {
       id: "3",
-      component: <PerformanceCard data={performanceData} />,
-      size: "large",
+      component: (
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <PerformanceCard data={performanceData} />
+        </Link>
+      ),
     },
     {
       id: "4",
       component: <DiscussionCard data={projectsData} />,
-      size: "small",
     },
-    { id: "5", component: <ModelCard data={documentData} />, size: "large" },
+    {
+      id: "5",
+      component: (
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <ModelCard data={documentData} />
+        </Link>
+      ),
+    },
     {
       id: "6",
       component: <IncomingProjectsCard data={projectsData} />,
-      size: "small",
     },
     {
       id: "7",
-      component: <TimeSavedCard data={timeData.saved} />,
-      size: "small",
+      component: (
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <TimeSavedCard data={timeData.saved} />
+        </Link>
+      ),
     },
     {
       id: "8",
-      component: <TimeTrackedCard data={timeData.tracked} />,
-      size: "small",
+      component: (
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <TimeTrackedCard data={timeData.tracked} />
+        </Link>
+      ),
     },
     {
       id: "9",
-      component: <WordsTranslatedCard data={timeData.translated} />,
-      size: "small",
+      component: (
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <WordsTranslatedCard data={timeData.translated} />
+        </Link>
+      ),
     },
   ]);
 
@@ -132,7 +175,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3, maxWidth: "1100px" }}>
       <Typography variant="h4" sx={{ mb: 3 }}>
         Dashboard
       </Typography>
@@ -145,22 +188,18 @@ export const Dashboard = () => {
           <Box
             component={Masonry}
             breakpointCols={{
-              default: 4, // 4 колонки по умолчанию
+              default: 3, // 4 колонки по умолчанию
               1200: 3, // 3 колонки при ширине экрана < 1200px
               900: 2, // 2 колонки при ширине экрана < 900px
               600: 1, // 1 колонка при ширине экрана < 600px
             }}
             sx={{
               display: "flex",
-
               marginLeft: "-16px", // убираем общий отступ
               width: "auto",
               "& > div": {
                 paddingLeft: "16px", // добавляем отступы внутри колонок
                 backgroundClip: "padding-box",
-                // gap: "16px",
-                // flexDirection: "column",
-                // padding: "16px",
               },
             }}
           >
@@ -184,55 +223,6 @@ export const Dashboard = () => {
       </DndContext>
     </Box>
   );
-
-  //     <Box sx={{ p: 3 }}>
-  //       <Typography variant="h4" sx={{ mb: 3 }}>
-  //         Dashboard
-  //       </Typography>
-  //       <DndContext
-  //         sensors={sensors}
-  //         collisionDetection={closestCorners}
-  //         onDragEnd={handleDragEnd}
-  //       >
-  //         <SortableContext items={cards.map((card) => card.id)}>
-  //           <Box
-  //             sx={{
-  //               display: "grid",
-  //               gridTemplateColumns: "repeat(auto-fill, 330px)",
-  //               gap: "16px", // Это гарантирует одинаковые отступы ВСЕГДА
-  //               gridAutoRows: "min-content", // Позволяет карточкам быть разной высоты
-  //               alignItems: "start", // Выравниваем по верхнему краю
-  //               gridAutoFlow: "dense",
-  //             }}
-  //           >
-  //             {cards.map((card) => (
-  //               <Box
-  //                 key={card.id}
-  //                 sx={
-  //                   {
-  //                     // gridRow: card.size === "large" ? "span 2" : "span 1",
-  //                   }
-  //                 }
-  //               >
-  //                 <CardWrapper
-  //                   id={card.id}
-  //                   sx={{
-  //                     padding: "16px",
-  //                     boxSizing: "border-box",
-  //                     height: "100%",
-  //                     display: "flex",
-  //                     flexDirection: "column",
-  //                   }}
-  //                 >
-  //                   {card.component}
-  //                 </CardWrapper>
-  //               </Box>
-  //             ))}
-  //           </Box>
-  //         </SortableContext>
-  //       </DndContext>
-  //     </Box>
-  //   );
 };
 
 export default Dashboard;
