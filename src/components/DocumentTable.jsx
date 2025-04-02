@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Added import for navigation
 import {
   Box,
   Typography,
@@ -156,7 +157,12 @@ const DocumentRow = ({
   progress = [], // Ensure progress is passed correctly
   last,
 }) => {
+  const navigate = useNavigate(); // Initialize navigation hook
   const executorList = Array.isArray(executors) ? executors : []; // Ensure executors is an array
+
+  const handleRowClick = () => {
+    navigate(`/documentoverview/`); // Navigate to DocumentOverview with document name
+  };
 
   return (
     <Box
@@ -167,6 +173,7 @@ const DocumentRow = ({
       height={56}
       px={3}
       borderRadius={3}
+      onClick={handleRowClick} // Added click handler
       sx={{
         backgroundColor: "background.paper",
         "&:hover": {

@@ -36,7 +36,7 @@ function NewProject() {
       ),
       total_documents: uploadedFiles.length,
       completed: 0, // Default value
-      ai_translation: 0, // Default value
+      ai_translation: uploadedFiles.length, // Default value
       linguist_verification: 0, // Default value
       translation: 0, // Default value
       validation: 0, // Default value
@@ -73,10 +73,7 @@ function NewProject() {
         minHeight: "100vh", // Занимает всю высоту экрана
         display: "flex",
         justifyContent: "center", // Центрирование по горизонтали
-
-        // bgcolor: "#f5f5f5", // Фон страницы (опционально)
         maxWidth: "100%", // Чтобы контент не вылезал за пределы экрана
-
         mt: 4, // Отступ сверху
       }}
     >
@@ -88,10 +85,7 @@ function NewProject() {
           flexDirection: "column",
           gap: 6,
           p: 8, // Отступы внутри контейнера
-          // bgcolor: "background.paper", // Фон контента
-
           boxShadow: 3, // Тень для контейнера
-          // Прижимаем к верху
         }}
       >
         {/* Parameter Section */}
@@ -101,7 +95,6 @@ function NewProject() {
             display: "flex",
             flexDirection: "column",
             gap: 1,
-            // bgcolor: "black",
           }}
         >
           <Box sx={{ display: "flex", gap: 1 }}>

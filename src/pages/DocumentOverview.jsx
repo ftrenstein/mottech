@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Paper, Typography, styled } from "@mui/material";
 import { translations } from "../data/documentDataOverview"; // Ensure translations is structured as an array of rows
 import RightPanel from "../components/RightPanel";
+import { useProjectContext } from "../context/ProjectContext";
 
 const StyledContainer = styled(Paper)(({ theme }) => ({
   border: `1px solid ${theme.palette.grey[300]}`,
@@ -22,6 +23,8 @@ const RowContainer = styled(Box)(({ theme }) => ({
 }));
 
 const DocumentOverview = () => {
+  const { projects, addProject, deleteProject, isLoading } =
+    useProjectContext();
   // Ensure translations is an array of rows
   const rows = Array.isArray(translations) ? translations : [translations];
 
@@ -36,10 +39,9 @@ const DocumentOverview = () => {
         mb: 4,
       }}
     >
-      <Typography variant="h4" sx={{ ml: 3 }}>
+      {/* <Typography variant="h4" sx={{ ml: 3 }}>
         {` Default document name`} {/* Display project name */}
-      </Typography>
-
+      {/* </Typography> */}
       <Box
         sx={{
           display: "flex",

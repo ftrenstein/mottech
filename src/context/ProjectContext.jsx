@@ -71,9 +71,24 @@ export const ProjectProvider = ({ children } = {}) => {
     saveProjectsToLocalStorage(updatedProjects);
   };
 
+  // Обновление параметров проекта
+  const updateProjectParameters = (id, updatedParameters) => {
+    const updatedProjects = projects.map((project) =>
+      project.id === id ? { ...project, ...updatedParameters } : project
+    );
+    setProjects(updatedProjects);
+    saveProjectsToLocalStorage(updatedProjects);
+  };
+
   return (
     <ProjectContext.Provider
-      value={{ projects, addProject, deleteProject, isLoading }}
+      value={{
+        projects,
+        addProject,
+        deleteProject,
+        updateProjectParameters, // Expose the new function
+        isLoading,
+      }}
     >
       {children}
     </ProjectContext.Provider>
