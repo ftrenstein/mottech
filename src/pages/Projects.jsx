@@ -13,6 +13,7 @@ import ongoingData from "../data/Ongoindata";
 import UniversalButton from "../components/UniversalButton";
 import { useNavigate } from "react-router-dom";
 import { useProjectContext } from "../context/ProjectContext";
+import { motion } from "framer-motion";
 
 function Projects() {
   const { projects, addProject, deleteProject, isLoading } =
@@ -70,7 +71,13 @@ function Projects() {
           New project
         </UniversalButton>
       </Box>
-      <Card sx={{ p: 5, borderRadius: "5px", border: "1px solid #e8e8e8" }}>
+      <Card
+        component={motion.div}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        sx={{ p: 5, borderRadius: "5px", border: "1px solid #e8e8e8" }}
+      >
         <Typography
           variant="subtitle2"
           sx={{ fontWeight: 600, fontSize: "0.75rem" }}
@@ -94,13 +101,16 @@ function Projects() {
           {barData.map((bar, index) => (
             <Box
               key={index}
+              component={motion.div}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: bar.opacity, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               sx={{
                 width: `${bar.width}px`,
                 height: `${bar.height}px`,
                 position: "absolute",
                 top: `${bar.top}px`,
                 left: `${bar.left}px`,
-                opacity: bar.opacity,
                 backgroundColor: "#3778a6",
                 borderRadius: "5px",
               }}

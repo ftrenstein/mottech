@@ -1,16 +1,16 @@
 export const timeData = {
   saved: {
-    value: "12,345",
+    value: 12345,
     description: "work hours have been saved through automation.",
     period: "This year",
   },
   tracked: {
-    value: "10",
+    value: 10,
     description: "hours spent in the system",
     period: "  This week",
   },
   translated: {
-    value: "57,438,468",
+    value: 57438468,
     description: "words have been translated using the system.",
   },
 };
@@ -26,7 +26,7 @@ export const projectsData = {
 };
 
 export const documentData = {
-  modelTraining: "73%",
+  modelTraining: "73",
   documents: [
     "B1-EC-CAT-POS-DRY_FCN-HAIR & SKI...",
     "B1-EC-CAT-POS-DRY_FCN-HAIR & SKI...",

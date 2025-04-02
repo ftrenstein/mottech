@@ -1,6 +1,19 @@
 import React from "react";
 import { Box, Card, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import ellipse from "../../assets/elipse.svg";
+
+const AnimatedNumber = ({ value }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    <Typography variant="h4" fontWeight="600">
+      {value}
+    </Typography>
+  </motion.div>
+);
 
 const Gauge = ({ time, description, altText }) => (
   <Box sx={{ flex: 1 }}>
@@ -25,9 +38,7 @@ const Gauge = ({ time, description, altText }) => (
       />
     </Box>
     <Box sx={{ mt: 1.25 }}>
-      <Typography variant="h4" fontWeight="600">
-        {time}
-      </Typography>
+      <AnimatedNumber value={time} />
       <Typography variant="caption">{description}</Typography>
     </Box>
 

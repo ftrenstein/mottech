@@ -20,6 +20,36 @@ const trainingBlocksData = [
   [1, 1, 1, 1, 1, 1, 1, 0.6, 0.6, 0.6],
 ];
 
+const AnimatedNumber = ({ value }) => {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const stepTime = 10;
+    const stepIncrement = Math.max(1, Math.ceil(value / 100));
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current = Math.min(current + stepIncrement, value);
+      setCount(current);
+      if (current >= value) clearInterval(timer);
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Typography variant="h4" fontWeight="600">
+        {count}
+      </Typography>
+    </motion.div>
+  );
+};
+
 const ModelCard = ({ data }) => {
   return (
     <Card
@@ -57,8 +87,8 @@ const ModelCard = ({ data }) => {
                       initial={{ opacity: 0, x: -20, scale: 0.9 }} // Начальное состояние (скрыт, левее)
                       animate={{ opacity, x: 0, scale: 1 }} // Анимация появления
                       transition={{
-                        duration: 0.03,
-                        delay: (rowIndex * 10 + blockIndex) * 0.01,
+                        duration: 0.05,
+                        delay: (rowIndex * 10 + blockIndex) * 0.03,
                         ease: "easeOut",
                       }}
                     >
@@ -77,13 +107,12 @@ const ModelCard = ({ data }) => {
 
             {/* Progress information */}
             <Box mt={2.5}>
-              <Typography
-                variant="h3"
-                fontWeight={600}
-                fontFamily="'Inter-SemiBold', Helvetica"
-              >
-                {data.modelTraining}
-              </Typography>
+              <Box display="flex" alignItems="baseline">
+                <AnimatedNumber value={data.modelTraining} />
+                <Typography variant="h4" fontWeight="600" ml={0.5}>
+                  %
+                </Typography>
+              </Box>
               <Typography
                 fontSize="0.75rem"
                 fontFamily="'Inter-Regular', Helvetica"

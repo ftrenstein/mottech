@@ -11,6 +11,7 @@ import DiscussionCard from "../components/CardWidgets/DiscussionCard";
 import IncomingProjectsCard from "../components/CardWidgets/IncomingProjectsCard";
 import Masonry from "react-masonry-css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"; // Import motion for animations
 
 import {
   projectsData,
@@ -50,16 +51,14 @@ const CardWrapper = ({ id, children }) => {
   };
 
   return (
-    <Box
+    <motion.div
       ref={setNodeRef}
       style={style}
       {...attributes}
-      sx={{
-        position: "relative", // Убедимся, что родитель имеет relative positioning
-        // "&:hover": {
-        //   boxShadow: "0px 3px 5px rgba(0,0,0,0.2)", // Визуальный эффект при наведении
-        // },
-      }}
+      initial={{ opacity: 0, scale: 0.9 }} // Initial animation state
+      animate={{ opacity: 1, scale: 1 }} // Animation on mount
+      exit={{ opacity: 0, scale: 0.9 }} // Animation on unmount
+      transition={{ duration: 0.3 }} // Animation duration
     >
       <Box
         {...listeners}
@@ -95,7 +94,7 @@ const CardWrapper = ({ id, children }) => {
         />
       </Box>
       {children}
-    </Box>
+    </motion.div>
   );
 };
 

@@ -6,6 +6,7 @@ import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { motion } from "framer-motion"; // Added import for framer-motion
 
 const Reports = () => {
   const barData = React.useMemo(
@@ -24,32 +25,38 @@ const Reports = () => {
   ];
 
   const renderCard = (title, content) => (
-    <Card
-      sx={{
-        p: 2.5,
-        height: 260,
-        width: 300,
-        borderRadius: "10px",
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <Stack spacing={5}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h6" fontWeight="600">
-            {title}
-          </Typography>
-          <Typography variant="caption" color="#969696">
-            Last 30 days
-          </Typography>
-        </Box>
-        {content}
-      </Stack>
-    </Card>
+      <Card
+        sx={{
+          p: 2.5,
+          height: 260,
+          width: 300,
+          borderRadius: "10px",
+        }}
+      >
+        <Stack spacing={5}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h6" fontWeight="600">
+              {title}
+            </Typography>
+            <Typography variant="caption" color="#969696">
+              Last 30 days
+            </Typography>
+          </Box>
+          {content}
+        </Stack>
+      </Card>
+    </motion.div>
   );
   const projectsAmountContent = (
     <Stack spacing={6} sx={{ width: "100%", height: "100%" }}>
@@ -78,14 +85,18 @@ const Reports = () => {
       {/* Нижний ряд — Бары */}
       <Box sx={{ position: "relative", width: "100%", height: 77 }}>
         {barData.map((bar, index) => (
-          <Box
+          <motion.div
             key={index}
-            sx={{
-              width: bar.width,
-              height: bar.height,
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            style={{
+              transformOrigin: "bottom",
               position: "absolute",
               top: bar.top,
               left: bar.left,
+              width: bar.width,
+              height: bar.height,
               opacity: bar.opacity,
               backgroundColor: "#3778a6",
               borderRadius: "5px",
@@ -151,9 +162,6 @@ const Reports = () => {
                 <sup>2%</sup>
               </span>
             </Typography>
-            {/* <Typography variant="caption" color="#E82F03">
-              ↓2%
-            </Typography> */}
           </Stack>
           <Typography variant="caption">projects completed</Typography>
         </Stack>

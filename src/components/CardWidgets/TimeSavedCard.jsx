@@ -1,6 +1,40 @@
 import React from "react";
 import { Box, Card, Typography } from "@mui/material";
+import { motion } from "framer-motion"; // Import motion for animation
 import DateSelector from "../DateSelector";
+
+// AnimatedNumber component
+const AnimatedNumber = ({ value }) => {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const stepTime = 10;
+    const stepIncrement = Math.max(1, Math.ceil(value / 100));
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current = Math.min(current + stepIncrement, value);
+      setCount(current);
+      if (current >= value) clearInterval(timer);
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  const formattedCount = count.toLocaleString(); // Add thousands separator
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Typography variant="h4" fontWeight="600" color="#969696">
+        {formattedCount}
+      </Typography>
+    </motion.div>
+  );
+};
 
 const TimeSavedCard = ({ data }) => {
   return (
@@ -26,9 +60,7 @@ const TimeSavedCard = ({ data }) => {
         <DateSelector data={data} />
       </Box>
 
-      <Typography variant="h4" color="#969696">
-        {data.value}
-      </Typography>
+      <AnimatedNumber value={data.value} />
 
       <Typography variant="caption">{data.description}</Typography>
     </Card>

@@ -23,7 +23,7 @@ const BarChart = ({ barData }) => (
         }}
         transition={{
           duration: 0.5, // Быстрая анимация (0.5 секунд)
-          delay: index * 0.1, // Задержка для каждого блока (по порядку)
+          delay: index * 0.2, // Задержка для каждого блока (по порядку)
           ease: "easeOut", // Плавный выход
         }}
         style={{
@@ -38,6 +38,36 @@ const BarChart = ({ barData }) => (
   </Box>
 );
 
+const AnimatedNumber = ({ value }) => {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    const stepTime = 10;
+    const stepIncrement = Math.max(1, Math.ceil(value / 100));
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current = Math.min(current + stepIncrement, value);
+      setCount(current);
+      if (current >= value) clearInterval(timer);
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Typography variant="h4" fontWeight="600">
+        {count}
+      </Typography>
+    </motion.div>
+  );
+};
+
 const ProjectStats = ({ inProgress, archived }) => (
   <Box
     sx={{
@@ -47,20 +77,15 @@ const ProjectStats = ({ inProgress, archived }) => (
       gap: "120px",
       position: "absolute",
       top: "85px",
-
       justifyContent: "space-between",
     }}
   >
     <Box sx={{ flex: 1 }}>
-      <Typography variant="h4" fontWeight="600">
-        {inProgress}
-      </Typography>
+      <AnimatedNumber value={inProgress} />
       <Typography variant="caption">projects in progress</Typography>
     </Box>
     <Box sx={{ flex: 1, justifyContent: "space-between" }}>
-      <Typography variant="h4" fontWeight="400" color="#969696">
-        {archived}
-      </Typography>
+      <AnimatedNumber value={archived} />
       <Typography variant="caption">archived tasks</Typography>
     </Box>
   </Box>
