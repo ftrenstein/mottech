@@ -15,11 +15,11 @@ const AnimatedNumber = ({ value }) => {
       setCount(current);
       if (current >= value) {
         clearInterval(timer);
-        // Start even slower mechanical clock-like growth
-        const slowGrowthTimer = setInterval(() => {
-          setCount((prev) => prev + 1);
-        }, 1000); // Slower increment every 5 seconds
-        return () => clearInterval(slowGrowthTimer);
+        // Start random jumps every 3 seconds
+        const randomJump = setInterval(() => {
+          setCount((prev) => prev + Math.floor(Math.random() * 8) + 3); // Random jump between 3 and 10
+        }, 3000); // Fixed interval of 3 seconds
+        return () => clearInterval(randomJump);
       }
     }, stepTime);
 

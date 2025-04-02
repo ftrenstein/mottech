@@ -9,17 +9,17 @@ import {
 import SearchBar from "../components/SearchBar";
 import ListDoc from "../components/List";
 
-import ongoingData from "../data/Ongoindata";
+// import ongoingData from "../data/Ongoindata";
 import UniversalButton from "../components/UniversalButton";
 import { useNavigate } from "react-router-dom";
 import { useProjectContext } from "../context/ProjectContext";
+// import {projects} from "../data/projects.json";
+import prevdata from "../data/Prevdata.js";
 import { motion } from "framer-motion";
 
 function Projects() {
-  const { projects, addProject, deleteProject, isLoading } =
-    useProjectContext();
+  const { projects } = useProjectContext();
   const navigate = useNavigate();
-  // const [projects, setProjects] = React.useState(ongoingData.projects);
   const barData = React.useMemo(
     () => [
       { width: 53, height: 3, top: 56, left: 0, opacity: 0.5 },
@@ -31,9 +31,16 @@ function Projects() {
     []
   );
   const [filter, setFilter] = React.useState("ongoing");
-  // if (isLoading) return <p>Загрузка проектов...</p>;
+  const filteredProjects = React.useMemo(() => {
+    if (filter === "ongoing") {
+      return projects;
+    } else if (filter === "previous") {
+      console.log("prevdata:", prevdata.projects);
+      return prevdata.projects;
+    }
+    return projects;
+  }, [filter, projects]);
 
-  console.log("Ongoing Projects:", ongoingData.projects);
   console.log("Projects:", projects);
   const handleFilterChange = (event, newFilter) => {
     if (newFilter !== null) {
@@ -175,7 +182,7 @@ function Projects() {
             "Completed",
             "Total docs",
           ]}
-          rows={projects.map((project) => ({
+          rows={filteredProjects.map((project) => ({
             id: project.id,
             name: project.name,
             starting_date: project.starting_date,

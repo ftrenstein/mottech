@@ -62,7 +62,7 @@ const columnConfig = {
 const ListDoc = ({ titles = [], rows = [], columns = [], onRowClick }) => {
   const theme = useTheme();
   console.log("rows", rows);
-  if (!rows || rows.length === 0) return <Typography>Нет данных</Typography>;
+  // if (!rows || rows.length === 0) return <Typography>Нет данных</Typography>;
 
   return (
     <TableContainer

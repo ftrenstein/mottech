@@ -1,3 +1,4 @@
+
 {
   "name": "my-app",
   "private": true,
@@ -8,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "/usr/bin/rsync -av --chmod=+X,o+r dist/* anastasiia@prod.mot-tiff.com:/opt/mot.tech/demo"
+    "deploy": "/usr/bin/rsync -av --chmod=+X,o+r dist/* anastasiia@prod.mot-tiff.com:/opt/mot.tech/demo && /usr/bin/rsync -av --chmod=+X,o+r dist/data/projects.json anastasiia@prod.mot-tiff.com:/opt/mot.tech/demo/public/data/"
+    
   },
   "dependencies": {
     "@dnd-kit/accessibility": "^3.1.1",

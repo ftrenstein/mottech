@@ -17,14 +17,12 @@ const Documents = () => {
     setSelectedCategory(category);
   };
 
-  // const [documentData, setDocumentData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("https://mot.tech/demo/data/tenants")
-  //     .then((response) => response.json())
-  //     .then((data) => setDocumentData(data))
-  //     .catch((error) => console.error("Ошибка загрузки документов:", error));
-  // }, []);
+  const filteredDocuments =
+    selectedCategory === "All"
+      ? ongoingData.projects[0].documents
+      : ongoingData.projects[0].documents.filter(
+          (document) => document.category === selectedCategory
+        );
 
   return (
     <Box
@@ -89,7 +87,7 @@ const Documents = () => {
 
       <ListDoc
         titles={["Documents", "Category", "Due date", "Project"]}
-        rows={ongoingData.projects[0].documents.map((document) => ({
+        rows={filteredDocuments.map((document) => ({
           id: document.id,
           name: document.name,
           category: document.category,
