@@ -1,0 +1,19 @@
+Login,E-mail,Access profiles, Password
+demo@mot.tech,"demo@mot.tech", Manager,123
+
+h.aveline,"h.aveline@mot.tech",External translator,123
+
+t.alexandre,"t.alexandre@mot.tech",Validator
+k.sebastien,"k.sebastien@mot.tech",Designer
+r.bernard,"r.bernard@mot.tech",Validator
+s.lefevre,"s.lefevre@mot.tech",Validator
+a.durand,"a.durand@mot.tech",Validator
+n.renard,"n.renard@mot.tech",Validator
+p.dubois,"p.dubois@mot.tech",Validator
+m.dupont,"m.dupont@mot.tech","External translator, Validator"
+l.gauthier,"l.gauthier@mot.tech","External translator, Validator"
+j.martin,"j.martin@mot.tech",External translator
+v.morel,"v.morel@mot.tech",External translator
+c.lemoine,"c.lemoine@mot.tech",External translator
+c.fabre,"c.fabre@mot.tech",External translator
+e.moreau,"e.moreau@mot.tech",External translator
