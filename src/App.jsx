@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { AuthProvider } from "./context/AuthContext";
@@ -73,7 +72,9 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <CssBaseline />
     <AuthProvider>
-      <BrowserRouter basename="/demo/">
+      <BrowserRouter
+        basename="/" // Убедитесь, что базовый путь соответствует вашему развертыванию
+      >
         <Routes>
           <Route
             path="/login"
