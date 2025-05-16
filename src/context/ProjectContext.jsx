@@ -9,7 +9,7 @@ export const ProjectProvider = ({ children } = {}) => {
   // Функция для загрузки данных из JSON-файла
   const fetchProjectsFromJson = async () => {
     try {
-      const response = await fetch("/demo/public/data/projects.json");
+      const response = await fetch("/data/projects.json");
       console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
